@@ -31,46 +31,54 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 motion-reduce:transition-none ${
+      className={`sticky top-0 z-50 w-full max-w-full overflow-x-hidden transition-all duration-300 motion-reduce:transition-none ${
         isOverlayHero
-          ? "bg-[#071A36]/80 text-white backdrop-blur-md border-b border-white/10"
-          : "bg-[#071A36] text-white shadow-md border-b border-white/10"
+          ? "border-b border-white/10 bg-[#071A36]/90 text-white backdrop-blur-md"
+          : "border-b border-white/10 bg-[#071A36] text-white shadow-md"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-3 py-3 sm:px-6 lg:px-8">
         {/* Left: Official SDT Logo */}
         <Link
           href="/#home"
-          className="flex shrink-0 items-center gap-3 rounded-lg bg-white/95 px-2.5 py-1.5 shadow-sm transition hover:bg-white"
+          className="flex shrink-0 items-center rounded-md bg-white px-2 py-1 shadow-xs"
         >
           <img
-            src="/assets/logo/sdt-logo.png"
+            src="/sdt-logo.png"
             alt="SDT — SHANORA DIGITAL TECHNOLOGY Logo"
-            className="h-9 w-auto object-contain sm:h-10"
+            className="h-8 w-auto max-w-[68px] object-contain sm:h-10 sm:max-w-none"
           />
         </Link>
 
-        {/* Center/Main Navigation Links */}
+        {/* Center Card: Shanora Digital Technology */}
+        <Link
+          href="/#home"
+          className="min-w-0 flex-1 truncate rounded-lg border border-white/20 bg-white/10 px-2.5 py-1.5 text-center text-[11px] font-bold tracking-tight text-white transition hover:bg-white/15 sm:flex-initial sm:px-4 sm:py-2 sm:text-sm"
+        >
+          <span className="truncate">Shanora Digital Technology</span>
+        </Link>
+
+        {/* Desktop Navigation */}
         <nav
           aria-label="Primary Navigation"
-          className="hidden items-center gap-6 text-sm font-medium lg:flex"
+          className="hidden items-center gap-5 text-sm font-medium lg:flex"
         >
           {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className="relative py-1 text-slate-200 transition-colors hover:text-white after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#2684FF] after:transition-all after:duration-200 hover:after:w-full"
+              className="whitespace-nowrap py-1 text-slate-200 transition-colors hover:text-white"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        {/* Right: Get a Quote CTA + Mobile Toggle */}
-        <div className="flex items-center gap-3">
+        {/* Right: Get a Quote + Mobile Toggle */}
+        <div className="flex shrink-0 items-center gap-2">
           <Link
             href="/#contact"
-            className="hidden rounded-lg bg-[#1456D9] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2684FF] sm:inline-flex"
+            className="hidden whitespace-nowrap rounded-lg bg-[#1456D9] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2684FF] sm:inline-flex"
           >
             Get a Quote
           </Link>
@@ -81,29 +89,9 @@ export default function Navbar() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav-drawer"
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/5 p-2 text-white transition hover:bg-white/10 lg:hidden"
+            className="inline-flex shrink-0 items-center justify-center rounded-lg border border-white/25 bg-white/10 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-white/15 lg:hidden"
           >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              {mobileOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            {mobileOpen ? "Close" : "Menu"}
           </button>
         </div>
       </div>
@@ -116,7 +104,7 @@ export default function Navbar() {
         }`}
       >
         <div className="overflow-hidden">
-          <div className="space-y-1 px-4 py-4 sm:px-6">
+          <div className="space-y-1 px-4 py-4">
             {navItems.map((item) => (
               <Link
                 key={item.label}
