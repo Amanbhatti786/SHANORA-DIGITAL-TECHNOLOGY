@@ -1319,7 +1319,7 @@ export default function HomePage() {
                   <div>
                     <dt className="font-semibold text-slate-500">WhatsApp</dt>
                     <dd className="mt-1 font-medium text-[#111827]">
-                      {WHATSAPP_NUMBER}
+                      {wa.me/923033639664}
                     </dd>
                   </div>
                   <div>
