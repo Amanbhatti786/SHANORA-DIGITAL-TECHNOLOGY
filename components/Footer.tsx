@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-// Editable Social Media URLs
 const SOCIAL_LINKS = {
   linkedin: "#contact",
   facebook: "#contact",
@@ -9,17 +8,16 @@ const SOCIAL_LINKS = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#071A36] text-slate-300 border-t border-white/10">
+    <footer className="w-full max-w-full overflow-x-hidden border-t border-white/10 bg-[#071A36] text-slate-300">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Column 1: SDT Logo, Name & Tagline */}
           <div className="space-y-4">
             <Link
               href="/#home"
               className="inline-flex items-center rounded-lg bg-white/95 px-3 py-1.5"
             >
               <img
-                src="/assets/logo/sdt-logo.png"
+                src="/sdt-logo.png"
                 alt="SDT Logo"
                 className="h-9 w-auto object-contain"
               />
@@ -32,7 +30,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Column 2: Company */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-widest text-[#7BB8FF]">
               Company
@@ -73,7 +70,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Services */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-widest text-[#7BB8FF]">
               Services
@@ -122,7 +118,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Follow Us */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-widest text-[#7BB8FF]">
               Follow Us
@@ -156,7 +151,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright Row */}
         <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-slate-400 sm:flex sm:items-center sm:justify-between sm:text-left">
           <p>© 2026 SHANORA DIGITAL TECHNOLOGY. All rights reserved.</p>
           <p className="mt-2 sm:mt-0">
