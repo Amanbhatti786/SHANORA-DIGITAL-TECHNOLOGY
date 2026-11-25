@@ -17,21 +17,13 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
-        <Link href="/" className="flex items-center gap-3">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+        <Link href="/" className="flex items-center">
           <img
-            src="/sdt-logo.png"
-            alt="SDT — SHANORA DIGITAL TECHNOLOGY Logo"
-            className="h-10 w-10 rounded-lg object-contain ring-1 ring-slate-200"
+            src="/sdt-logo.jpg"
+            alt="SDT — SHANORA DIGITAL TECHNOLOGY"
+            className="h-11 w-auto object-contain"
           />
-          <div className="leading-tight">
-            <span className="block text-sm font-extrabold tracking-wide text-slate-900 sm:text-base">
-              SDT
-            </span>
-            <span className="block text-[11px] font-medium tracking-wider text-slate-500">
-              SHANORA DIGITAL TECHNOLOGY
-            </span>
-          </div>
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm font-medium md:flex">
