@@ -8,7 +8,7 @@ export default function Footer() {
           <img
             src="/sdt-logo.jpg"
             alt="SDT Logo"
-            className="h-8 w-auto object-contain"
+            className="h-9 w-auto object-contain"
           />
           <p className="text-sm">
             © {new Date().getFullYear()} SDT — SHANORA DIGITAL TECHNOLOGY. All rights reserved.
