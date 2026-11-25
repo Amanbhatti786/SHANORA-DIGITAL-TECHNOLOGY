@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-        {/* Logo + Card beside Logo */}
+        {/* Logo + Name Card */}
         <div className="flex items-center gap-3">
           <Link href="/" className="flex shrink-0 items-center">
             <img
@@ -30,16 +30,16 @@ export default function Navbar() {
 
           <Link
             href="/"
-            className="flex items-center gap-2 rounded-xl border border-indigo-100 bg-gradient-to-r from-indigo-50/90 via-white to-slate-50 px-3.5 py-2 shadow-sm transition hover:border-indigo-200 hover:shadow"
+            className="inline-flex items-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-3.5 py-2 text-slate-900 shadow-sm transition hover:bg-indigo-100/70"
           >
             <span className="h-2 w-2 shrink-0 rounded-full bg-indigo-600" />
-            <span className="text-xs font-bold tracking-wide text-slate-900 sm:text-sm">
+            <span className="whitespace-nowrap text-xs font-bold tracking-wide sm:text-sm">
               Shanora Digital Technology
             </span>
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
           {navLinks.map((item) => {
             const active = pathname === item.href;
@@ -65,7 +65,7 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Button */}
         <button
           type="button"
           onClick={() => setOpen(!open)}
@@ -76,7 +76,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Nav */}
       {open && (
         <div className="border-t border-slate-200 bg-white px-4 py-4 md:hidden">
           <div className="flex flex-col gap-2 text-sm font-medium">
