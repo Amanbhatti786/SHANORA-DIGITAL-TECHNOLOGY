@@ -6,7 +6,7 @@ import { FormEvent, useState } from "react";
 const BLOGGER_BASE_URL = "#blog";
 const FOUNDER_LINKEDIN_URL = "#contact";
 const BUSINESS_EMAIL = "[ADD BUSINESS EMAIL]";
-const WHATSAPP_NUMBER = "[ADD WHATSAPP NUMBER]";
+const WHATSAPP_NUMBER = "wa.me/923033639664";
 const LINKEDIN_URL = "[ADD LINKEDIN URL]";
 
 interface ServiceItem {
