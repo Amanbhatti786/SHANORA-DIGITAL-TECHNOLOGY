@@ -3,437 +3,352 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
-const BLOGGER_BASE_URL = "#blog";
-const FOUNDER_LINKEDIN_URL = "#contact";
-const BUSINESS_EMAIL = "[ADD BUSINESS EMAIL]";
-const WHATSAPP_NUMBER = "wa.me/923033639664";
-const LINKEDIN_URL = "[ADD LINKEDIN URL]";
+// Configured Contact & Optional Form Endpoint (set NEXT_PUBLIC_FORM_ENDPOINT in Vercel/env)
+const CONTACT_EMAIL = "shanoradigitaltechnology@gmail.com";
+const WHATSAPP_DISPLAY = "03033639664";
+const WHATSAPP_WA_URL = "https://wa.me/923033639664";
+const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT ?? "";
 
-interface ServiceItem {
+const TECHNOLOGIES = [
+  "Next.js",
+  "React",
+  "JavaScript",
+  "TypeScript",
+  "Supabase",
+  "PostgreSQL",
+  "Python",
+  "OpenAI API",
+  "n8n",
+];
+
+interface CoreService {
   id: string;
   title: string;
   description: string;
-  icon:
-    | "web"
-    | "app"
-    | "seo"
-    | "marketing"
-    | "ai"
-    | "automation"
-    | "school"
-    | "consulting";
+  highlights?: string[];
+  featuredAI?: boolean;
+  icon: "web" | "custom" | "agents" | "automation" | "school" | "ux";
 }
 
-const SERVICES: ServiceItem[] = [
+const CORE_SERVICES: CoreService[] = [
   {
-    id: "website-development",
-    title: "Website Development",
+    id: "website-web-app-development",
+    title: "Website & Web Application Development",
     description:
-      "Modern, responsive, and professional websites for businesses and organizations.",
+      "We develop modern, responsive, and high-performance websites and web applications designed to help businesses establish a strong digital presence and deliver better user experiences.",
     icon: "web",
   },
   {
-    id: "web-application-development",
-    title: "Web Application Development",
+    id: "custom-software-development",
+    title: "Custom Software Development",
     description:
-      "Custom web applications and digital platforms designed around business requirements.",
-    icon: "app",
+      "We build customized software solutions tailored to business requirements, helping organizations improve productivity, streamline operations, and solve real-world problems.",
+    icon: "custom",
   },
   {
-    id: "seo-services",
-    title: "SEO Services",
+    id: "ai-agents-development",
+    title: "AI Agents Development",
     description:
-      "Search engine optimization strategies to improve website visibility and organic discovery.",
-    icon: "seo",
+      "We design and develop intelligent AI agents that can interact with users, use connected tools, retrieve information, perform assigned tasks, and automate business workflows.",
+    highlights: [
+      "AI Customer Support Agents",
+      "AI Sales and Lead Generation Agents",
+      "AI Research Agents",
+      "AI Business Assistant Agents",
+      "AI Education Agents",
+      "AI Workflow Agents",
+    ],
+    featuredAI: true,
+    icon: "agents",
   },
   {
-    id: "digital-marketing",
-    title: "Digital Marketing",
+    id: "ai-business-automation",
+    title: "AI & Business Automation",
     description:
-      "Digital marketing solutions that help businesses strengthen their online presence.",
-    icon: "marketing",
-  },
-  {
-    id: "ai-powered-solutions",
-    title: "AI-Powered Solutions",
-    description:
-      "Practical AI integrations and intelligent digital tools for business productivity.",
-    icon: "ai",
-  },
-  {
-    id: "business-automation",
-    title: "Business Automation",
-    description:
-      "Digital workflows and automation solutions that help simplify business operations.",
+      "We help businesses automate repetitive tasks and improve operational efficiency through AI-powered workflows, intelligent integrations, and business process automation.",
     icon: "automation",
   },
   {
     id: "school-management-systems",
     title: "School Management Systems",
     description:
-      "Technology solutions designed to support educational institutions and school operations.",
+      "We develop digital solutions for educational institutions, including student management, attendance systems, academic records, school administration, and educational technology platforms.",
     icon: "school",
   },
   {
-    id: "it-consulting",
-    title: "IT Consulting",
+    id: "ui-ux-design",
+    title: "UI/UX Design",
     description:
-      "Technology guidance and digital planning for businesses and organizations.",
-    icon: "consulting",
+      "We create intuitive, modern, and user-friendly digital experiences for websites, software applications, and digital products.",
+    icon: "ux",
   },
 ];
 
-const VALUE_POINTS = [
+const SHANORA_FEATURES = [
+  "Professional Profiles",
+  "Networking",
+  "Professional Feed",
+  "Career Opportunities",
+  "Company Pages",
+  "Job Listings",
+  "Digital Communities",
+];
+
+interface PortfolioProject {
+  id: string;
+  name: string;
+  category: string;
+  status?: "Live" | "In Development";
+  description: string;
+  technologies: string[];
+  liveUrl?: string;
+  previewLabel: string;
+}
+
+const PORTFOLIO_PROJECTS: PortfolioProject[] = [
   {
-    title: "Professional Digital Solutions",
+    id: "shanora-platform",
+    name: "SHANORA",
+    category: "Professional Networking Platform",
+    status: "Live",
     description:
-      "Structured architecture, clean interfaces, and dependable implementation tailored to business goals.",
+      "International professional networking and career platform connecting professionals, students, job seekers, companies, recruiters, and businesses.",
+    technologies: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL"],
+    liveUrl: "https://shanora.online",
+    previewLabel: "shanora.online — Networking & Career Hub",
+  },
+  {
+    id: "sdt-school-management",
+    name: "SDT School Management System",
+    category: "School Management Solutions",
+    status: "In Development",
+    description:
+      "Digital school operations solution supporting student management, attendance tracking, academic records, and school administration workflows.",
+    technologies: ["React", "TypeScript", "Supabase", "PostgreSQL"],
+    previewLabel: "Academic & Campus Administration Portal",
+  },
+  {
+    id: "sdt-agency-platform",
+    name: "SHANORA Digital Technology Platform",
+    category: "Business Websites",
+    status: "Live",
+    description:
+      "International software development and AI solutions company website presenting core engineering services, flagship products, and project inquiry workflows.",
+    technologies: ["Next.js", "React", "TypeScript"],
+    liveUrl: "https://sdt-official.vercel.app",
+    previewLabel: "sdt-official.vercel.app — Corporate Web Platform",
+  },
+];
+
+const WORKFLOW_STEPS = [
+  {
+    number: "01",
+    title: "Discover",
+    description:
+      "Understand the client's goals, requirements, and business challenges.",
+  },
+  {
+    number: "02",
+    title: "Plan",
+    description:
+      "Define the project scope, technology approach, and development roadmap.",
+  },
+  {
+    number: "03",
+    title: "Develop",
+    description:
+      "Build the solution using suitable technologies and modern development practices.",
+  },
+  {
+    number: "04",
+    title: "Deliver",
+    description:
+      "Test, deploy, and deliver the completed digital solution.",
+  },
+];
+
+const WHY_CHOOSE_ITEMS = [
+  {
+    title: "Founder-Led Technology Development",
+    description:
+      "Direct product leadership and hands-on technical execution focused on quality and clarity.",
+  },
+  {
+    title: "Practical Digital Solutions",
+    description:
+      "Purpose-built software and workflows designed around real business and operational needs.",
+  },
+  {
+    title: "Modern Software Development",
+    description:
+      "Clean, maintainable codebases built with modern web, database, and cloud-ready practices.",
+  },
+  {
+    title: "AI and Automation Focus",
+    description:
+      "Applied AI agents and workflow automation that reduce manual effort and support team productivity.",
   },
   {
     title: "Client-Focused Approach",
     description:
-      "Every engagement starts with your requirements, timelines, and practical operational outcomes.",
+      "Transparent communication, structured milestones, and alignment with your business objectives.",
   },
   {
-    title: "Modern Technology",
+    title: "Scalable Digital Products",
     description:
-      "Current web standards, responsive layouts, and adaptable digital systems built for longevity.",
+      "Modular architecture structured to grow smoothly as users, features, and organizations expand.",
   },
 ];
 
-const WHY_CHOOSE_SDT = [
-  {
-    title: "Client-Focused Solutions",
-    description:
-      "We focus on understanding business requirements and creating solutions that address real needs.",
-    icon: "target",
-  },
-  {
-    title: "Modern Technology",
-    description:
-      "We use modern development practices to build efficient and scalable digital experiences.",
-    icon: "layers",
-  },
-  {
-    title: "Practical Innovation",
-    description:
-      "We focus on useful technology that creates real value for businesses.",
-    icon: "spark",
-  },
-  {
-    title: "Clear Communication",
-    description:
-      "We believe in transparent communication and a professional project development process.",
-    icon: "chat",
-  },
+const SERVICE_OPTIONS = [
+  "Website Development",
+  "Custom Software Development",
+  "AI Agents Development",
+  "AI & Business Automation",
+  "School Management Systems",
+  "UI/UX Design",
+  "Other",
 ];
 
-const PROCESS_STEPS = [
-  {
-    step: "STEP 01",
-    label: "DISCOVER",
-    description:
-      "Understand the client's business, goals, and project requirements.",
-  },
-  {
-    step: "STEP 02",
-    label: "PLAN",
-    description:
-      "Define the project scope, strategy, timeline, and solution.",
-  },
-  {
-    step: "STEP 03",
-    label: "DEVELOP",
-    description:
-      "Build and refine the digital solution using appropriate technology.",
-  },
-  {
-    step: "STEP 04",
-    label: "DELIVER",
-    description:
-      "Launch the project and provide agreed support.",
-  },
-];
-
-const BLOG_ARTICLES = [
-  {
-    category: "Web Strategy",
-    title: "How to Build a Professional Business Website",
-    summary:
-      "Key structure, clarity, mobile usability, and conversion principles for a business website that earns client trust.",
-    href: BLOGGER_BASE_URL,
-  },
-  {
-    category: "Digital Operations",
-    title: "Digital Transformation for Small Businesses",
-    summary:
-      "Practical steps for adopting digital tools and streamlined workflows without unnecessary complexity.",
-    href: BLOGGER_BASE_URL,
-  },
-  {
-    category: "Productivity",
-    title: "Practical AI Tools for Business Growth",
-    summary:
-      "How organizations can apply AI-assisted tools responsibly to save time and support everyday teams.",
-    href: BLOGGER_BASE_URL,
-  },
-];
-
-function ServiceIcon({ type }: { type: ServiceItem["icon"] }) {
-  const classes = "h-5 w-5 text-[#1456D9]";
+function ServiceIcon({ type }: { type: CoreService["icon"] }) {
+  const cls = "h-5 w-5 text-[#1456D9]";
   switch (type) {
     case "web":
       return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 6A2.25 2.25 0 016 3.75h12A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6zm0 3.75h16.5"
-          />
+        <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h12A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6zm0 4.5h16.5" />
         </svg>
       );
-    case "app":
+    case "custom":
       return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
-          />
+        <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
         </svg>
       );
-    case "seo":
+    case "agents":
       return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-4.35-4.35m1.85-5.4a7.25 7.25 0 11-14.5 0 7.25 7.25 0 0114.5 0z"
-          />
-        </svg>
-      );
-    case "marketing":
-      return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
-          />
-        </svg>
-      );
-    case "ai":
-      return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
-          />
+        <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
         </svg>
       );
     case "automation":
       return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-          />
+        <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
         </svg>
       );
     case "school":
       return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"
-          />
+        <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342" />
         </svg>
       );
-    case "consulting":
+    case "ux":
       return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
-          />
-        </svg>
-      );
-  }
-}
-
-function ValueCardIcon({ type }: { type: string }) {
-  const classes = "h-5 w-5 text-[#2684FF]";
-  switch (type) {
-    case "target":
-      return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 21a9 9 0 100-18 9 9 0 000 18zm0-4.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zm0-3a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
-          />
-        </svg>
-      );
-    case "layers":
-      return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
-          />
-        </svg>
-      );
-    case "spark":
-      return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-          />
-        </svg>
-      );
-    default:
-      return (
-        <svg
-          className={classes}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.8}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
-          />
+        <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
         </svg>
       );
   }
 }
 
 export default function HomePage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    service: "Website Development",
-    budget: "",
-    details: "",
+  const [formState, setFormState] = useState({
+    fullName: "",
+    businessEmail: "",
+    companyName: "",
+    serviceRequired: "Website Development",
+    projectBudget: "",
+    projectDetails: "",
+    honeypot: "",
   });
 
-  const [formError, setFormError] = useState<string | null>(null);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [submittedSuccess, setSubmittedSuccess] = useState(false);
 
-  const handleSelectService = (serviceTitle: string) => {
-    setFormData((prev) => ({ ...prev, service: serviceTitle }));
+  const handleServiceSelect = (serviceName: string) => {
+    setFormState((prev) => ({ ...prev, serviceRequired: serviceName }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleInquirySubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormError(null);
-    setFormSubmitted(false);
+    setErrorMessage(null);
+    setSubmittedSuccess(false);
 
-    if (!formData.name.trim()) {
-      setFormError("Please enter your name.");
+    // Basic honeypot anti-spam check
+    if (formState.honeypot.trim().length > 0) {
+      setErrorMessage("Unable to submit form. Please try again.");
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
-      setFormError("Please enter a valid email address.");
+    if (!formState.fullName.trim()) {
+      setErrorMessage("Please enter your full name.");
       return;
     }
 
-    if (!formData.service.trim()) {
-      setFormError("Please select a required service.");
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formState.businessEmail.trim() || !emailPattern.test(formState.businessEmail.trim())) {
+      setErrorMessage("Please enter a valid business email address.");
       return;
     }
 
-    if (!formData.details.trim() || formData.details.trim().length < 10) {
-      setFormError(
-        "Please provide a brief description of your project (at least 10 characters)."
+    if (!formState.serviceRequired.trim()) {
+      setErrorMessage("Please select a required service.");
+      return;
+    }
+
+    if (!formState.projectDetails.trim() || formState.projectDetails.trim().length < 10) {
+      setErrorMessage("Please share at least 10 characters of project details.");
+      return;
+    }
+
+    if (!FORM_ENDPOINT) {
+      setErrorMessage(
+        `Form endpoint is not configured yet. Please send your inquiry directly to ${CONTACT_EMAIL} or WhatsApp ${WHATSAPP_DISPLAY}.`
       );
       return;
     }
 
-    setFormSubmitted(true);
+    setSubmitting(true);
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formState.fullName.trim(),
+          businessEmail: formState.businessEmail.trim(),
+          companyName: formState.companyName.trim(),
+          serviceRequired: formState.serviceRequired,
+          projectBudget: formState.projectBudget.trim(),
+          projectDetails: formState.projectDetails.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send inquiry");
+      }
+
+      setSubmittedSuccess(true);
+      setFormState({
+        fullName: "",
+        businessEmail: "",
+        companyName: "",
+        serviceRequired: "Website Development",
+        projectBudget: "",
+        projectDetails: "",
+        honeypot: "",
+      });
+    } catch {
+      setErrorMessage(
+        `We could not send your inquiry right now. Please email ${CONTACT_EMAIL} or message ${WHATSAPP_DISPLAY} on WhatsApp.`
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -441,32 +356,24 @@ export default function HomePage() {
       id="home"
       className="w-full max-w-full overflow-x-hidden bg-[#FFFFFF] text-[#111827]"
     >
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-[#071A36] text-white">
+      {/* 4. HERO SECTION */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#071A36] via-[#0A244C] to-[#071A36] text-white">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-[#1456D9]/25 blur-3xl"
+          className="pointer-events-none absolute -top-24 right-0 h-96 w-96 rounded-full bg-[#1456D9]/25 blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 -bottom-28 h-80 w-80 rounded-full bg-[#2684FF]/20 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-15"
-          style={{
-            backgroundImage:
-              "radial-gradient(#2684FF 1px, transparent 1px), linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px)",
-            backgroundSize: "36px 36px",
-          }}
+          className="pointer-events-none absolute -bottom-24 left-1/4 h-80 w-80 rounded-full bg-[#2684FF]/15 blur-3xl"
         />
 
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-24 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+            {/* Left Column */}
             <div className="min-w-0 lg:col-span-7">
               <p className="inline-flex items-center gap-2 rounded-full border border-[#2684FF]/40 bg-[#1456D9]/20 px-3.5 py-1.5 text-xs font-semibold tracking-wider text-[#7BB8FF] uppercase">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-[#2684FF]" />
-                <span>YOUR DIGITAL TECHNOLOGY PARTNER</span>
+                <span>SHANORA Digital Technology (SDT)</span>
               </p>
 
               <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-white break-words sm:text-5xl lg:text-[3.35rem] lg:leading-[1.12]">
@@ -477,9 +384,10 @@ export default function HomePage() {
               </h1>
 
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                We help businesses transform their ideas into powerful digital
-                experiences through professional web development, innovative
-                technology, and intelligent digital solutions.
+                SHANORA Digital Technology helps businesses, startups, and
+                organizations transform their ideas into powerful digital products
+                through modern software development, AI agents, intelligent
+                automation, and innovative technology solutions.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3.5">
@@ -487,63 +395,77 @@ export default function HomePage() {
                   href="#contact"
                   className="rounded-lg bg-[#1456D9] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2684FF]"
                 >
-                  Get a Free Quote
+                  Start a Project
                 </Link>
                 <Link
-                  href="#services"
+                  href="#work"
                   className="rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/10"
                 >
-                  Explore Our Services
+                  Explore Our Work
                 </Link>
               </div>
             </div>
 
+            {/* Right Column: Software & AI Product Interface Visual */}
             <div className="min-w-0 lg:col-span-5">
-              <div className="rounded-2xl border border-white/15 bg-white/[0.04] p-5 backdrop-blur-sm sm:p-7">
-                <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
-                  <div className="flex min-w-0 items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1456D9]/30 text-sm font-bold text-[#7BB8FF]">
-                      SDT
-                    </div>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-bold text-white">
-                        SHANORA DIGITAL TECHNOLOGY
-                      </p>
-                      <p className="truncate text-xs text-slate-300">
-                        International Digital Services Agency
-                      </p>
-                    </div>
+              <div className="rounded-2xl border border-white/15 bg-[#0C264F]/90 p-5 shadow-2xl backdrop-blur-xs sm:p-6">
+                <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-3.5">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#2684FF]" />
+                    <span className="text-xs font-semibold tracking-wider text-slate-200 uppercase">
+                      SDT Product &amp; AI Workspace
+                    </span>
                   </div>
-                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#2684FF]" />
+                  <span className="rounded-md bg-[#1456D9]/25 px-2 py-0.5 text-[11px] font-semibold text-[#7BB8FF]">
+                    Software &amp; AI
+                  </span>
                 </div>
 
-                <div className="mt-5 space-y-4">
-                  <div className="rounded-xl border border-white/10 bg-[#071A36]/80 p-4">
-                    <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-[#7BB8FF]">
-                      <span>GLOBAL ARCHITECTURE</span>
-                      <span>WEB • AI • CLOUD</span>
+                <div className="mt-4 space-y-3.5">
+                  <div className="rounded-xl border border-white/10 bg-[#071A36] p-4">
+                    <div className="flex items-center justify-between text-xs text-slate-300">
+                      <span className="font-semibold text-white">
+                        AI Agent Workflow Engine
+                      </span>
+                      <span className="text-[#7BB8FF]">Active Modules</span>
                     </div>
-                    <div className="mt-3 grid grid-cols-1 gap-2 text-center text-xs sm:grid-cols-3 sm:gap-2.5">
-                      <div className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-2 text-slate-200">
-                        Web &amp; Apps
+                    <div className="mt-3 grid grid-cols-2 gap-2.5 text-xs">
+                      <div className="rounded-lg border border-white/10 bg-white/[0.04] p-2.5">
+                        <p className="font-semibold text-white">
+                          Custom Applications
+                        </p>
+                        <p className="mt-0.5 text-[11px] text-slate-400">
+                          Web &amp; tailored systems
+                        </p>
                       </div>
-                      <div className="rounded-lg border border-[#2684FF]/40 bg-[#1456D9]/20 px-2.5 py-2 font-medium text-white">
-                        AI &amp; Automation
-                      </div>
-                      <div className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-2 text-slate-200">
-                        SEO &amp; Growth
+                      <div className="rounded-lg border border-[#2684FF]/40 bg-[#1456D9]/20 p-2.5">
+                        <p className="font-semibold text-white">AI Agents</p>
+                        <p className="mt-0.5 text-[11px] text-[#A8CEFF]">
+                          Support, sales &amp; ops
+                        </p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="text-xs font-semibold tracking-wider text-slate-300 uppercase">
-                      Designed For Global Markets
-                    </p>
-                    <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                      Supporting startups, SMEs, educational institutions, and
-                      organizations across international regions.
-                    </p>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-xs font-semibold text-[#7BB8FF]">
+                          FLAGSHIP PLATFORM
+                        </p>
+                        <p className="mt-0.5 text-sm font-bold text-white">
+                          SHANORA — Networking &amp; Careers
+                        </p>
+                      </div>
+                      <a
+                        href="https://shanora.online"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-lg bg-[#1456D9] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[#2684FF]"
+                      >
+                        Visit ↗
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -552,93 +474,104 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TRUST AND INTRODUCTION SECTION */}
-      <section className="border-b border-slate-200 bg-[#F4F7FB]">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16 lg:px-8">
-          <div className="max-w-3xl">
-            <h2 className="text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
-              Technology That Helps Businesses Move Forward
-            </h2>
-            <p className="mt-3 text-base leading-relaxed text-slate-600">
-              At SHANORA DIGITAL TECHNOLOGY, we focus on building practical
-              digital solutions that help businesses establish their online
-              presence, improve operations, and explore new growth
-              opportunities.
-            </p>
-          </div>
+      {/* 5. TECHNOLOGY AND EXPERTISE SECTION */}
+      <section className="border-b border-slate-200 bg-[#F4F7FB] py-10 sm:py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
+                TECHNOLOGY STACK
+              </p>
+              <h2 className="mt-1 text-lg font-bold text-[#111827] sm:text-xl">
+                Tools &amp; Technologies We Work With
+              </h2>
+            </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {VALUE_POINTS.map((point, idx) => (
-              <div
-                key={point.title}
-                className="rounded-xl border border-slate-200/90 bg-white p-5 shadow-xs"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#1456D9]/10 text-xs font-bold text-[#1456D9]">
-                    0{idx + 1}
-                  </span>
-                  <h3 className="text-base font-bold text-[#111827]">
-                    {point.title}
-                  </h3>
-                </div>
-                <p className="mt-2.5 text-sm leading-relaxed text-slate-600">
-                  {point.description}
-                </p>
-              </div>
-            ))}
+            <div className="flex flex-wrap gap-2">
+              {TECHNOLOGIES.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-lg border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-[#111827] shadow-2xs sm:text-sm"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SERVICES SECTION */}
+      {/* 6. SERVICES SECTION (6 CORE SERVICES) */}
       <section id="services" className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
-              OUR SERVICES
+              CORE SERVICES
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
-              Digital Services Designed for Your Growth
+              Software, AI Agents &amp; Digital Solutions
             </h2>
             <p className="mt-3 text-base leading-relaxed text-slate-600">
-              From professional websites to intelligent business solutions, we
-              help turn ideas into practical digital experiences.
+              Focused engineering and design services built for businesses,
+              startups, and educational institutions.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.map((service) => (
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {CORE_SERVICES.map((service) => (
               <article
                 key={service.id}
-                className="group flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[#1456D9]/40 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                className={`group flex flex-col justify-between rounded-2xl border p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${
+                  service.featuredAI
+                    ? "border-[#1456D9]/40 bg-[#F4F7FB]/80 ring-1 ring-[#1456D9]/15"
+                    : "border-slate-200 bg-white hover:border-[#1456D9]/35"
+                }`}
               >
                 <div>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#F4F7FB] ring-1 ring-slate-200/80 transition group-hover:bg-[#1456D9]/10 group-hover:ring-[#1456D9]/30">
-                    <ServiceIcon type={service.icon} />
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#F4F7FB] ring-1 ring-slate-200/80 transition group-hover:bg-[#1456D9]/10">
+                      <ServiceIcon type={service.icon} />
+                    </div>
+                    {service.featuredAI && (
+                      <span className="rounded-full bg-[#1456D9] px-2.5 py-1 text-[11px] font-semibold text-white">
+                        Key AI Capability
+                      </span>
+                    )}
                   </div>
 
-                  <h3 className="mt-5 text-lg font-bold text-[#111827]">
+                  <h3 className="mt-5 text-xl font-bold text-[#111827]">
                     {service.title}
                   </h3>
 
                   <p className="mt-2.5 text-sm leading-relaxed text-slate-600">
                     {service.description}
                   </p>
+
+                  {service.highlights && (
+                    <div className="mt-4 border-t border-slate-200/80 pt-3.5">
+                      <p className="text-[11px] font-bold tracking-wider text-[#071A36] uppercase">
+                        AI Agent Solutions We Build
+                      </p>
+                      <ul className="mt-2 space-y-1.5 text-xs text-slate-700">
+                        {service.highlights.map((item) => (
+                          <li key={item} className="flex items-center gap-2">
+                            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#1456D9]" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
-                <div className="mt-6 border-t border-slate-100 pt-3">
+                <div className="mt-6 border-t border-slate-100 pt-3.5">
                   <Link
                     href="#contact"
-                    onClick={() => handleSelectService(service.title)}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1456D9] transition group-hover:text-[#2684FF]"
+                    onClick={() => handleServiceSelect(service.title)}
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1456D9] transition hover:text-[#2684FF]"
                   >
                     <span>Learn More</span>
-                    <span
-                      aria-hidden="true"
-                      className="transition-transform group-hover:translate-x-0.5"
-                    >
-                      →
-                    </span>
+                    <span aria-hidden="true">→</span>
                   </Link>
                 </div>
               </article>
@@ -647,50 +580,46 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED PROJECT SECTION — SHANORA */}
-      <section
-        id="portfolio"
-        className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24"
-      >
+      {/* 7. FEATURED DIGITAL PRODUCT — SHANORA */}
+      <section className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="grid items-center gap-12 lg:grid-cols-12">
+            {/* Product Details */}
             <div className="min-w-0 lg:col-span-6">
               <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
-                FEATURED PROJECT
+                FLAGSHIP DIGITAL PRODUCT
               </p>
 
-              <div className="mt-2 flex flex-wrap items-center gap-3">
-                <h2 className="text-3xl font-extrabold tracking-tight text-[#111827] sm:text-4xl">
-                  SHANORA
-                </h2>
-                <span className="rounded-full bg-[#1456D9]/10 px-3 py-1 text-xs font-semibold text-[#1456D9]">
-                  Professional Networking &amp; Career Platform
-                </span>
-              </div>
+              <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[#111827] sm:text-4xl">
+                Introducing SHANORA
+              </h2>
+
+              <p className="mt-1.5 text-sm font-semibold text-[#1456D9]">
+                International Professional Networking &amp; Career Platform
+              </p>
 
               <p className="mt-4 text-base leading-relaxed text-slate-600">
                 SHANORA is an international professional networking and career
-                platform designed to connect professionals, job seekers,
-                companies, and businesses through digital technology. Developed
-                as a digital platform by the founder.
+                platform designed to connect professionals, students, job seekers,
+                companies, recruiters, and businesses through digital technology.
               </p>
 
-              <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {[
-                  "Professional Networking",
-                  "Career Opportunities",
-                  "Company Pages",
-                  "Digital Community",
-                ].map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm font-medium text-[#111827]"
-                  >
-                    <span className="h-2 w-2 shrink-0 rounded-full bg-[#1456D9]" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-6">
+                <p className="text-xs font-bold tracking-wider text-slate-500 uppercase">
+                  Platform Features
+                </p>
+                <ul className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                  {SHANORA_FEATURES.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-[#111827]"
+                    >
+                      <span className="h-2 w-2 shrink-0 rounded-full bg-[#1456D9]" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               <div className="mt-8">
                 <a
@@ -705,89 +634,356 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Desktop + Mobile Interface Mockup */}
             <div className="min-w-0 lg:col-span-6">
-              <div className="mx-auto w-full max-w-xl">
-                <div className="rounded-t-2xl border-4 border-[#071A36] bg-[#071A36] shadow-xl sm:border-8">
-                  <div className="flex items-center justify-between rounded-t-lg bg-[#102A54] px-3 py-2">
+              <div className="relative mx-auto max-w-xl pb-6 sm:pr-12">
+                {/* Desktop Mockup */}
+                <div className="rounded-xl border border-slate-300 bg-white shadow-lg">
+                  <div className="flex items-center justify-between rounded-t-xl bg-[#071A36] px-3.5 py-2 text-xs text-slate-200">
                     <div className="flex items-center gap-1.5">
-                      <span className="h-2 w-2 rounded-full bg-white/30" />
-                      <span className="h-2 w-2 rounded-full bg-white/30" />
-                      <span className="h-2 w-2 rounded-full bg-white/30" />
+                      <span className="h-2 w-2 rounded-full bg-white/40" />
+                      <span className="h-2 w-2 rounded-full bg-white/40" />
+                      <span className="h-2 w-2 rounded-full bg-white/40" />
                     </div>
-                    <span className="rounded bg-[#071A36]/80 px-2.5 py-0.5 text-[11px] font-medium text-slate-200">
-                      shanora.online
-                    </span>
+                    <span className="font-medium">shanora.online</span>
                     <span className="w-6" />
                   </div>
 
-                  <div className="bg-white p-4 text-[#111827] sm:p-5">
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                  <div className="p-4 sm:p-5">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                       <div className="flex items-center gap-2">
                         <img
                           src="/sdt-logo.png"
-                          alt="SHANORA Platform Preview"
+                          alt="SHANORA Desktop Preview"
                           className="h-6 w-auto object-contain"
                         />
-                        <span className="text-sm font-extrabold tracking-wide text-[#071A36]">
+                        <span className="text-sm font-extrabold text-[#071A36]">
                           SHANORA
                         </span>
                       </div>
                       <span className="rounded-md bg-[#F4F7FB] px-2.5 py-1 text-[11px] font-semibold text-[#1456D9]">
-                        Networking &amp; Careers
+                        Career &amp; Networking Hub
                       </span>
                     </div>
 
-                    <div className="mt-4 rounded-xl bg-[#F4F7FB] p-4">
-                      <p className="text-xs font-bold tracking-wider text-[#1456D9] uppercase">
-                        Global Talent &amp; Business Hub
-                      </p>
-                      <p className="mt-1 text-sm font-bold text-[#111827]">
-                        Connecting Professionals, Career Seekers &amp; Company
-                        Profiles
-                      </p>
-                      <p className="mt-1.5 text-xs text-slate-600">
-                        Structured profiles, company showcases, and community
-                        connections on a unified platform.
-                      </p>
-                    </div>
-
-                    <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                      <div className="rounded-lg border border-slate-200/80 p-2">
+                    <div className="mt-4 space-y-2.5">
+                      <div className="rounded-lg bg-[#F4F7FB] p-3.5">
                         <p className="text-xs font-bold text-[#071A36]">
-                          Profiles
+                          Professional Profiles &amp; Feed
                         </p>
-                        <p className="mt-0.5 text-[10px] text-slate-500">
-                          Career &amp; Skills
+                        <p className="mt-1 text-xs text-slate-600">
+                          Connect with peers, follow company pages, and explore
+                          career opportunities.
                         </p>
                       </div>
-                      <div className="rounded-lg border border-slate-200/80 p-2">
-                        <p className="text-xs font-bold text-[#071A36]">
-                          Companies
-                        </p>
-                        <p className="mt-0.5 text-[10px] text-slate-500">
-                          Brand Pages
-                        </p>
-                      </div>
-                      <div className="rounded-lg border border-slate-200/80 p-2">
-                        <p className="text-xs font-bold text-[#071A36]">
-                          Network
-                        </p>
-                        <p className="mt-0.5 text-[10px] text-slate-500">
-                          Global Reach
-                        </p>
+                      <div className="grid grid-cols-2 gap-2.5 text-xs">
+                        <div className="rounded-lg border border-slate-200 p-2.5">
+                          <p className="font-semibold text-[#071A36]">
+                            Job Listings
+                          </p>
+                          <p className="text-[11px] text-slate-500">
+                            Roles &amp; talent discovery
+                          </p>
+                        </div>
+                        <div className="rounded-lg border border-slate-200 p-2.5">
+                          <p className="font-semibold text-[#071A36]">
+                            Communities
+                          </p>
+                          <p className="text-[11px] text-slate-500">
+                            Industry groups &amp; updates
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="h-3 w-full rounded-b-xl bg-slate-300 shadow-md" />
+                {/* Mobile Interface Mockup */}
+                <div className="mt-4 w-44 rounded-2xl border-4 border-[#071A36] bg-white p-3 shadow-xl sm:absolute sm:right-0 sm:bottom-0 sm:mt-0">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-1.5">
+                    <span className="text-[10px] font-extrabold text-[#071A36]">
+                      SHANORA
+                    </span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#1456D9]" />
+                  </div>
+                  <p className="mt-2 text-[10px] font-semibold text-[#111827]">
+                    Mobile Network
+                  </p>
+                  <p className="mt-1 text-[10px] leading-snug text-slate-500">
+                    Profiles, jobs, and company updates on mobile.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* WHY CHOOSE SDT SECTION */}
+      {/* 8. PORTFOLIO / OUR WORK */}
+      <section id="work" className="bg-white py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
+              OUR WORK
+            </p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
+              Selected Digital Projects
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-slate-600">
+              Explore digital products and technology solutions developed by
+              SHANORA Digital Technology.
+            </p>
+
+            {/* Portfolio Categories */}
+            <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-slate-700">
+              {[
+                "Professional Networking Platform",
+                "Education Technology",
+                "School Management Solutions",
+                "Business Websites",
+                "Web Applications",
+              ].map((cat) => (
+                <span
+                  key={cat}
+                  className="rounded-full border border-slate-200 bg-[#F4F7FB] px-3 py-1"
+                >
+                  {cat}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {PORTFOLIO_PROJECTS.map((project) => (
+              <article
+                key={project.id}
+                className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs transition hover:border-[#1456D9]/40 hover:shadow-md"
+              >
+                <div>
+                  {/* Project Preview Frame */}
+                  <div className="rounded-xl border border-slate-200 bg-[#071A36] p-4 text-white">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-semibold text-[#7BB8FF]">
+                        {project.category}
+                      </span>
+                      {project.status === "In Development" ? (
+                        <span className="rounded-full bg-amber-400/20 px-2.5 py-0.5 text-[10px] font-bold text-amber-200">
+                          In Development
+                        </span>
+                      ) : (
+                        <span className="rounded-full bg-emerald-400/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-200">
+                          Live
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-3 text-sm font-bold text-white">
+                      {project.previewLabel}
+                    </p>
+                  </div>
+
+                  <h3 className="mt-5 text-xl font-bold text-[#111827]">
+                    {project.name}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    {project.description}
+                  </p>
+
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {project.technologies.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-md bg-[#F4F7FB] px-2.5 py-1 text-[11px] font-semibold text-slate-700"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 border-t border-slate-100 pt-4">
+                  {project.liveUrl ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1456D9] hover:text-[#2684FF]"
+                    >
+                      <span>Live Preview</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : (
+                    <span className="text-xs font-semibold text-slate-500">
+                      In Development
+                    </span>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. ABOUT SHANORA DIGITAL TECHNOLOGY */}
+      <section
+        id="about"
+        className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
+              ABOUT SDT
+            </p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
+              About SHANORA Digital Technology
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
+              SHANORA Digital Technology is a digital technology company focused
+              on developing practical software solutions, modern web applications,
+              AI-powered systems, and innovative digital products.
+            </p>
+            <p className="mt-3 text-base leading-relaxed text-slate-600">
+              We work toward helping businesses, startups, educational
+              institutions, and organizations transform their ideas into
+              effective digital solutions.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6">
+              <h3 className="text-xs font-extrabold tracking-wider text-[#1456D9] uppercase">
+                Our Mission
+              </h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-slate-700 sm:text-base">
+                To create useful, reliable, and innovative digital solutions that
+                help businesses and communities grow through technology.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-6">
+              <h3 className="text-xs font-extrabold tracking-wider text-[#1456D9] uppercase">
+                Our Vision
+              </h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-slate-700 sm:text-base">
+                To become a trusted technology partner for businesses and
+                organizations worldwide by delivering meaningful digital
+                innovation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. FOUNDER & CEO SECTION */}
+      <section id="founder" className="bg-white py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
+              LEADERSHIP
+            </p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
+              Meet Our Founder
+            </h2>
+          </div>
+
+          <div className="mt-10 grid items-center gap-10 lg:grid-cols-12">
+            {/* Founder Portrait */}
+            <div className="lg:col-span-4">
+              <div className="rounded-2xl border border-slate-200 bg-[#F4F7FB] p-6 text-center">
+                <div className="mx-auto h-56 w-56 max-w-full overflow-hidden rounded-2xl border border-slate-300 bg-white shadow-xs">
+                  <img
+                    src="/founder.jpeg"
+                    alt="Amanullah Bhatti — Founder & CEO, SHANORA Digital Technology"
+                    className="h-full w-full object-cover object-top"
+                  />
+                </div>
+                <h3 className="mt-5 text-xl font-extrabold text-[#111827]">
+                  Amanullah Bhatti
+                </h3>
+                <p className="mt-1 text-sm font-semibold text-[#1456D9]">
+                  Founder &amp; CEO
+                </p>
+                <p className="mt-1 text-xs font-medium text-slate-600">
+                  SHANORA Digital Technology
+                </p>
+              </div>
+            </div>
+
+            {/* Founder Bio */}
+            <div className="lg:col-span-8">
+              <div className="space-y-4 text-base leading-relaxed text-slate-700">
+                <p>
+                  Amanullah Bhatti is a technology entrepreneur and software
+                  product founder with a background in Information Technology and
+                  a Diploma from IBA Sukkur.
+                </p>
+                <p>
+                  As the Founder &amp; CEO of SHANORA Digital Technology, he
+                  leads the company&apos;s vision, product development,
+                  technology direction, and business strategy.
+                </p>
+                <p>
+                  His work includes developing SHANORA, an international
+                  professional networking and career platform, along with digital
+                  technology solutions for educational institutions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 11. HOW WE WORK (Horizontal on Desktop, Vertical on Mobile) */}
+      <section className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
+              HOW WE WORK
+            </p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
+              Our Four-Step Delivery Process
+            </h2>
+          </div>
+
+          <div className="relative mt-12">
+            <div
+              aria-hidden="true"
+              className="absolute top-6 right-0 left-0 hidden h-0.5 bg-slate-300 lg:block"
+            />
+
+            <div className="relative grid gap-8 lg:grid-cols-4 lg:gap-6">
+              {WORKFLOW_STEPS.map((item, idx) => (
+                <div
+                  key={item.title}
+                  className="relative flex gap-4 lg:flex-col lg:gap-0"
+                >
+                  {idx < WORKFLOW_STEPS.length - 1 && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-12 left-6 h-full w-0.5 bg-slate-300 lg:hidden"
+                    />
+                  )}
+
+                  <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#1456D9] bg-white text-xs font-extrabold text-[#1456D9]">
+                    {item.number}
+                  </div>
+
+                  <div className="flex-1 rounded-2xl border border-slate-200 bg-white p-5 lg:mt-5">
+                    <h3 className="text-lg font-bold text-[#111827]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 12. WHY CHOOSE SDT */}
       <section className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
@@ -795,19 +991,19 @@ export default function HomePage() {
               WHY CHOOSE SDT
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
-              Your Partner in Digital Innovation
+              Why Partner With SHANORA Digital Technology
             </h2>
           </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY_CHOOSE_SDT.map((item) => (
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {WHY_CHOOSE_ITEMS.map((item, idx) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-slate-200 bg-[#F4F7FB]/60 p-6 transition hover:border-[#1456D9]/30 hover:bg-white"
+                className="rounded-2xl border border-slate-200 bg-[#F4F7FB]/60 p-6 transition hover:border-[#1456D9]/35 hover:bg-white"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#071A36]">
-                  <ValueCardIcon type={item.icon} />
-                </div>
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#071A36] text-xs font-bold text-white">
+                  0{idx + 1}
+                </span>
                 <h3 className="mt-4 text-lg font-bold text-[#111827]">
                   {item.title}
                 </h3>
@@ -820,366 +1016,84 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* HOW WE WORK SECTION */}
-      <section className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
-              HOW WE WORK
-            </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
-              From Idea to Digital Experience
-            </h2>
-          </div>
-
-          <div className="relative mt-12">
-            <div
-              aria-hidden="true"
-              className="absolute top-6 right-0 left-0 hidden h-0.5 bg-slate-300 lg:block"
-            />
-
-            <div className="relative grid gap-8 lg:grid-cols-4 lg:gap-6">
-              {PROCESS_STEPS.map((item, index) => (
-                <div
-                  key={item.step}
-                  className="relative flex gap-4 lg:flex-col lg:gap-0"
-                >
-                  {index < PROCESS_STEPS.length - 1 && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute top-12 left-6 h-full w-0.5 bg-slate-300 lg:hidden"
-                    />
-                  )}
-
-                  <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#1456D9] bg-white text-xs font-extrabold text-[#1456D9] shadow-xs">
-                    0{index + 1}
-                  </div>
-
-                  <div className="flex-1 rounded-2xl border border-slate-200 bg-white p-5 lg:mt-5">
-                    <p className="text-xs font-bold tracking-wider text-[#1456D9]">
-                      {item.step} — {item.label}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FOUNDER SECTION */}
-      <section id="founder" className="bg-white py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
-              LEADERSHIP
-            </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
-              Meet the Founder Behind SDT
-            </h2>
-          </div>
-
-          <div className="mt-12 grid items-start gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-4">
-              <div className="rounded-2xl border border-slate-200 bg-[#F4F7FB] p-6 text-center">
-                <div className="mx-auto h-52 w-52 max-w-full overflow-hidden rounded-2xl border border-slate-300/80 bg-white shadow-xs">
-                  <img
-                    src="public/founder.jpeg"
-                    alt="Amanullah Bhatti — Founder & CEO, SHANORA DIGITAL TECHNOLOGY"
-                    className="h-full w-full object-cover object-top"
-                  />
-                </div>
-
-                <h3 className="mt-5 text-xl font-extrabold text-[#111827]">
-                  Amanullah Bhatti
-                </h3>
-                <p className="mt-1 text-sm font-semibold text-[#1456D9]">
-                  Founder &amp; CEO
-                </p>
-                <p className="mt-1 text-xs text-slate-500">
-                  SHANORA DIGITAL TECHNOLOGY (SDT)
-                </p>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8">
-              <div className="space-y-4 text-base leading-relaxed text-slate-700">
-                <p>
-                  Amanullah Bhatti is a technology professional, digital
-                  entrepreneur, and the Founder &amp; CEO of SHANORA DIGITAL
-                  TECHNOLOGY.
-                </p>
-                <p>
-                  With a background in Information Technology and a Diploma from
-                  IBA Sukkur, Amanullah combines technical knowledge, practical
-                  experience, and entrepreneurial vision to develop digital
-                  solutions for businesses and organizations.
-                </p>
-                <p>
-                  He has experience in developing digital platforms and technology
-                  solutions, particularly in the education sector.
-                </p>
-                <p>
-                  His work includes developing SHANORA, an international
-                  professional networking and career platform, and building
-                  digital solutions for educational institutions.
-                </p>
-                <p>
-                  As the Founder &amp; CEO of SHANORA DIGITAL TECHNOLOGY, he
-                  leads the company&apos;s vision, technology direction, product
-                  development, and business growth.
-                </p>
-                <p>
-                  His mission is to help businesses and organizations benefit from
-                  modern technology through practical, innovative, and reliable
-                  digital solutions.
-                </p>
-              </div>
-
-              <blockquote className="mt-6 rounded-xl border-l-4 border-[#1456D9] bg-[#F4F7FB] px-5 py-4 text-sm font-medium text-[#071A36] italic sm:text-base">
-                &ldquo;My vision is to build a globally recognized digital
-                technology brand that connects ideas, technology, and business
-                opportunities.&rdquo;
-              </blockquote>
-
-              <div className="mt-7 flex flex-wrap items-center gap-4">
-                <a
-                  href={FOUNDER_LINKEDIN_URL}
-                  className="rounded-lg bg-[#1456D9] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#2684FF]"
-                >
-                  Connect with Founder
-                </a>
-                <Link
-                  href="#about"
-                  className="rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-[#111827] transition hover:bg-slate-50"
-                >
-                  About the Founder
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT SDT SECTION */}
+      {/* 13. CONTACT / START A PROJECT */}
       <section
-        id="about"
-        className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24"
+        id="contact"
+        className="border-t border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
-              ABOUT SDT
-            </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
-              Technology With Purpose
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-slate-600">
-              SHANORA DIGITAL TECHNOLOGY is a digital services brand focused on
-              helping businesses, entrepreneurs, and organizations build a
-              stronger digital presence through modern technology and practical
-              solutions.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="text-xs font-extrabold tracking-wider text-[#1456D9] uppercase">
-                OUR MISSION
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-700">
-                To deliver practical and innovative digital solutions that help
-                businesses and organizations grow.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="text-xs font-extrabold tracking-wider text-[#1456D9] uppercase">
-                OUR VISION
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-700">
-                To build a globally recognized technology brand that connects
-                businesses with digital opportunities.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="text-xs font-extrabold tracking-wider text-[#1456D9] uppercase">
-                OUR VALUES
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-700">
-                Innovation, integrity, quality, reliability, and continuous
-                improvement.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BLOG SECTION */}
-      <section id="blog" className="bg-white py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div className="max-w-2xl">
-              <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
-                BLOG &amp; RESOURCES
-              </p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
-                Insights for the Digital World
-              </h2>
-              <p className="mt-3 text-base leading-relaxed text-slate-600">
-                Explore articles, practical guides, and technology insights to
-                help businesses understand and use digital technology.
-              </p>
-            </div>
-
-            <a
-              href={BLOGGER_BASE_URL}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-[#111827] transition hover:border-[#1456D9] hover:text-[#1456D9]"
-            >
-              <span>Explore All Articles</span>
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {BLOG_ARTICLES.map((post) => (
-              <article
-                key={post.title}
-                className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-[#F4F7FB]/50 p-6 transition hover:border-[#1456D9]/40 hover:bg-white hover:shadow-sm"
-              >
-                <div>
-                  <span className="inline-block rounded-md bg-[#1456D9]/10 px-2.5 py-1 text-xs font-semibold text-[#1456D9]">
-                    {post.category}
-                  </span>
-                  <h3 className="mt-4 text-lg font-bold text-[#111827]">
-                    {post.title}
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-slate-600">
-                    {post.summary}
-                  </p>
-                </div>
-
-                <div className="mt-6 border-t border-slate-200/70 pt-3">
-                  <a
-                    href={post.href}
-                    className="text-sm font-semibold text-[#1456D9] hover:text-[#2684FF]"
-                  >
-                    Read Article →
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CALL TO ACTION */}
-      <section className="relative overflow-hidden bg-[#071A36] py-16 text-white sm:py-20">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-0 -right-20 h-72 w-72 rounded-full bg-[#2684FF]/20 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-[#1456D9]/25 blur-3xl"
-        />
-
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
-            <div className="max-w-2xl">
-              <p className="text-xs font-bold tracking-widest text-[#7BB8FF] uppercase">
-                SHANORA DIGITAL TECHNOLOGY
-              </p>
-              <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                Have a Project in Mind?
-              </h2>
-              <p className="mt-3 text-base leading-relaxed text-slate-300">
-                Let&apos;s turn your ideas into powerful digital solutions and
-                create something meaningful for your business.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="#contact"
-                className="rounded-lg bg-[#1456D9] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2684FF]"
-              >
-                Start Your Project
-              </Link>
-              <Link
-                href="#contact"
-                className="rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT SECTION */}
-      <section id="contact" className="bg-[#F4F7FB] py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
-              GET IN TOUCH
+              CONTACT
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
-              Let&apos;s Start a Conversation
+              Have a Project in Mind?
             </h2>
             <p className="mt-3 text-base leading-relaxed text-slate-600">
-              Tell us about your project and discover how SHANORA DIGITAL
-              TECHNOLOGY can help.
+              Let&apos;s discuss your business goals and build a digital solution
+              that creates real value.
             </p>
           </div>
 
           <div className="mt-10 grid gap-10 lg:grid-cols-12">
+            {/* Inquiry Form */}
             <div className="min-w-0 lg:col-span-7">
               <form
-                onSubmit={handleSubmit}
+                onSubmit={handleInquirySubmit}
                 noValidate
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs sm:p-8"
+                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs sm:p-8"
               >
-                {formError && (
+                {/* Honeypot field for basic spam prevention */}
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="website-url">Website</label>
+                  <input
+                    id="website-url"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formState.honeypot}
+                    onChange={(e) =>
+                      setFormState({ ...formState, honeypot: e.target.value })
+                    }
+                  />
+                </div>
+
+                {errorMessage && (
                   <div
                     role="alert"
                     className="mb-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
                   >
-                    {formError}
+                    {errorMessage}
                   </div>
                 )}
 
-                {formSubmitted && (
+                {submittedSuccess && (
                   <div
                     role="status"
                     className="mb-5 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800"
                   >
-                    Your inquiry details passed frontend validation. Connect this
-                    form to Formspree, Web3Forms, or an email service to
-                    receive submissions directly.
+                    Thank you. Your project inquiry has been submitted. We will
+                    review your requirements and follow up shortly.
                   </div>
                 )}
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label
-                      htmlFor="contact-name"
+                      htmlFor="full-name"
                       className="block text-sm font-semibold text-[#111827]"
                     >
-                      Name *
+                      Full Name *
                     </label>
                     <input
-                      id="contact-name"
-                      name="name"
+                      id="full-name"
+                      name="fullName"
                       type="text"
                       required
-                      value={formData.name}
+                      value={formState.fullName}
                       onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
+                        setFormState({ ...formState, fullName: e.target.value })
                       }
                       placeholder="Your full name"
                       className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
@@ -1188,39 +1102,45 @@ export default function HomePage() {
 
                   <div>
                     <label
-                      htmlFor="contact-email"
+                      htmlFor="business-email"
                       className="block text-sm font-semibold text-[#111827]"
                     >
-                      Email *
+                      Business Email *
                     </label>
                     <input
-                      id="contact-email"
-                      name="email"
+                      id="business-email"
+                      name="businessEmail"
                       type="email"
                       required
-                      value={formData.email}
+                      value={formState.businessEmail}
                       onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
+                        setFormState({
+                          ...formState,
+                          businessEmail: e.target.value,
+                        })
                       }
-                      placeholder="you@company.com"
+                      placeholder="name@company.com"
                       className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                     />
                   </div>
 
                   <div>
                     <label
-                      htmlFor="contact-company"
+                      htmlFor="company-name"
                       className="block text-sm font-semibold text-[#111827]"
                     >
-                      Company
+                      Company Name
                     </label>
                     <input
-                      id="contact-company"
-                      name="company"
+                      id="company-name"
+                      name="companyName"
                       type="text"
-                      value={formData.company}
+                      value={formState.companyName}
                       onChange={(e) =>
-                        setFormData({ ...formData, company: e.target.value })
+                        setFormState({
+                          ...formState,
+                          companyName: e.target.value,
+                        })
                       }
                       placeholder="Company or organization"
                       className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
@@ -1229,23 +1149,26 @@ export default function HomePage() {
 
                   <div>
                     <label
-                      htmlFor="contact-service"
+                      htmlFor="service-required"
                       className="block text-sm font-semibold text-[#111827]"
                     >
                       Service Required *
                     </label>
                     <select
-                      id="contact-service"
-                      name="service"
-                      value={formData.service}
+                      id="service-required"
+                      name="serviceRequired"
+                      value={formState.serviceRequired}
                       onChange={(e) =>
-                        setFormData({ ...formData, service: e.target.value })
+                        setFormState({
+                          ...formState,
+                          serviceRequired: e.target.value,
+                        })
                       }
                       className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                     >
-                      {SERVICES.map((s) => (
-                        <option key={s.id} value={s.title}>
-                          {s.title}
+                      {SERVICE_OPTIONS.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
                         </option>
                       ))}
                     </select>
@@ -1254,93 +1177,93 @@ export default function HomePage() {
 
                 <div className="mt-5">
                   <label
-                    htmlFor="contact-budget"
+                    htmlFor="project-budget"
                     className="block text-sm font-semibold text-[#111827]"
                   >
                     Project Budget
                   </label>
                   <input
-                    id="contact-budget"
-                    name="budget"
+                    id="project-budget"
+                    name="projectBudget"
                     type="text"
-                    value={formData.budget}
+                    value={formState.projectBudget}
                     onChange={(e) =>
-                      setFormData({ ...formData, budget: e.target.value })
+                      setFormState({
+                        ...formState,
+                        projectBudget: e.target.value,
+                      })
                     }
-                    placeholder="e.g., Flexible / To be discussed"
+                    placeholder="Estimated budget or flexible"
                     className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                   />
                 </div>
 
                 <div className="mt-5">
                   <label
-                    htmlFor="contact-details"
+                    htmlFor="project-details"
                     className="block text-sm font-semibold text-[#111827]"
                   >
                     Project Details *
                   </label>
                   <textarea
-                    id="contact-details"
-                    name="details"
+                    id="project-details"
+                    name="projectDetails"
                     rows={4}
                     required
-                    value={formData.details}
+                    value={formState.projectDetails}
                     onChange={(e) =>
-                      setFormData({ ...formData, details: e.target.value })
+                      setFormState({
+                        ...formState,
+                        projectDetails: e.target.value,
+                      })
                     }
-                    placeholder="Share your goals, timeline, and key requirements..."
+                    placeholder="Describe your goals, key features, and expected timeline..."
                     className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="mt-6 w-full rounded-lg bg-[#1456D9] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2684FF] sm:w-auto"
+                  disabled={submitting}
+                  className="mt-6 w-full rounded-lg bg-[#1456D9] px-6 py-3.5 text-sm font-semibold text-white shadow-xs transition hover:bg-[#2684FF] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                 >
-                  Send Project Inquiry
+                  {submitting ? "Sending Inquiry..." : "Send Project Inquiry"}
                 </button>
               </form>
             </div>
 
+            {/* Direct Contact Channels */}
             <div className="min-w-0 space-y-6 lg:col-span-5">
               <div className="rounded-2xl border border-slate-200 bg-white p-6">
                 <h3 className="text-lg font-bold text-[#111827]">
-                  Direct Contact Details
+                  Direct Contact
                 </h3>
                 <dl className="mt-4 space-y-4 text-sm">
                   <div>
-                    <dt className="font-semibold text-slate-500">
-                      Business Email
-                    </dt>
-                    <dd className="mt-1 font-medium break-all text-[#111827]">
-                      {BUSINESS_EMAIL}
+                    <dt className="font-semibold text-slate-500">Email</dt>
+                    <dd className="mt-1">
+                      <a
+                        href={`mailto:${CONTACT_EMAIL}`}
+                        className="font-medium break-all text-[#1456D9] hover:underline"
+                      >
+                        {CONTACT_EMAIL}
+                      </a>
                     </dd>
                   </div>
                   <div>
                     <dt className="font-semibold text-slate-500">WhatsApp</dt>
-                    <dd className="mt-1 font-medium text-[#111827]">
-                      {wa.me/923033639664}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="font-semibold text-slate-500">LinkedIn</dt>
-                    <dd className="mt-1 font-medium break-all text-[#111827]">
-                      {LINKEDIN_URL}
+                    <dd className="mt-1">
+                      <a
+                        href={WHATSAPP_WA_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-[#1456D9] hover:underline"
+                      >
+                        {WHATSAPP_DISPLAY}
+                      </a>
                     </dd>
                   </div>
                 </dl>
-              </div>
-
-              <div className="rounded-2xl border border-slate-200 bg-white p-6">
-                <h3 className="text-sm font-bold tracking-wider text-[#1456D9] uppercase">
-                  Form Submission Setup
-                </h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
-                  This form includes client-side validation only and does not
-                  send emails on its own. To receive live inquiries on static
-                  hosting, connect the form to a free form endpoint such as
-                  Formspree or Web3Forms.
-                </p>
               </div>
             </div>
           </div>
