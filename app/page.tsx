@@ -887,7 +887,7 @@ export default function HomePage() {
               <div className="rounded-2xl border border-slate-200 bg-[#F4F7FB] p-6 text-center">
                 <div className="mx-auto h-52 w-52 max-w-full overflow-hidden rounded-2xl border border-slate-300/80 bg-white shadow-xs">
                   <img
-                    src="/founder.jpeg"
+                    src="public/founder.jpeg"
                     alt="Amanullah Bhatti — Founder & CEO, SHANORA DIGITAL TECHNOLOGY"
                     className="h-full w-full object-cover object-top"
                   />
