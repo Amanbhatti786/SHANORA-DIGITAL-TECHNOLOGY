@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 const CANONICAL_URL = "https://shanora.online";
 
@@ -59,8 +67,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth motion-reduce:scroll-auto">
-      <body className="flex min-h-screen w-full max-w-full flex-col overflow-x-hidden bg-[#FFFFFF] text-[#111827] antialiased selection:bg-[#1456D9] selection:text-white">
+    <html
+      lang="en"
+      className={`${plusJakarta.variable} scroll-smooth motion-reduce:scroll-auto`}
+    >
+      <body className="flex min-h-screen w-full max-w-full flex-col overflow-x-hidden bg-[#FFFFFF] font-sans text-[#111827] antialiased selection:bg-[#1456D9] selection:text-white">
         <Navbar />
         <main className="w-full max-w-full flex-1 overflow-x-hidden">
           {children}
