@@ -22,7 +22,7 @@ export default function Navbar() {
           <img
             src="/sdt-logo.jpg"
             alt="SDT — SHANORA DIGITAL TECHNOLOGY"
-            className="h-11 w-auto object-contain"
+            className="h-12 w-auto object-contain sm:h-14"
           />
         </Link>
 
