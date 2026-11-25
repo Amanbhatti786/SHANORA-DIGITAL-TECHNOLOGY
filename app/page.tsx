@@ -437,7 +437,10 @@ export default function HomePage() {
   };
 
   return (
-    <div id="home" className="w-full max-w-full overflow-x-hidden bg-[#FFFFFF] text-[#111827]">
+    <div
+      id="home"
+      className="w-full max-w-full overflow-x-hidden bg-[#FFFFFF] text-[#111827]"
+    >
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#071A36] text-white">
         <div
@@ -446,7 +449,7 @@ export default function HomePage() {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-28 right-0 h-80 w-80 rounded-full bg-[#2684FF]/20 blur-3xl"
+          className="pointer-events-none absolute right-0 -bottom-28 h-80 w-80 rounded-full bg-[#2684FF]/20 blur-3xl"
         />
         <div
           aria-hidden="true"
@@ -461,12 +464,12 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-24 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
             <div className="min-w-0 lg:col-span-7">
-              <p className="inline-flex items-center gap-2 rounded-full border border-[#2684FF]/40 bg-[#1456D9]/20 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#7BB8FF]">
+              <p className="inline-flex items-center gap-2 rounded-full border border-[#2684FF]/40 bg-[#1456D9]/20 px-3.5 py-1.5 text-xs font-semibold tracking-wider text-[#7BB8FF] uppercase">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-[#2684FF]" />
                 <span>YOUR DIGITAL TECHNOLOGY PARTNER</span>
               </p>
 
-              <h1 className="mt-6 break-words text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.35rem] lg:leading-[1.12]">
+              <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-white break-words sm:text-5xl lg:text-[3.35rem] lg:leading-[1.12]">
                 Building Digital Solutions.{" "}
                 <span className="text-[#2684FF]">
                   Connecting Global Businesses.
@@ -534,7 +537,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    <p className="text-xs font-semibold tracking-wider text-slate-300 uppercase">
                       Designed For Global Markets
                     </p>
                     <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
@@ -591,7 +594,7 @@ export default function HomePage() {
       <section id="services" className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1456D9]">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
               OUR SERVICES
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
@@ -652,7 +655,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
             <div className="min-w-0 lg:col-span-6">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#1456D9]">
+              <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
                 FEATURED PROJECT
               </p>
 
@@ -735,7 +738,7 @@ export default function HomePage() {
                     </div>
 
                     <div className="mt-4 rounded-xl bg-[#F4F7FB] p-4">
-                      <p className="text-xs font-bold uppercase tracking-wider text-[#1456D9]">
+                      <p className="text-xs font-bold tracking-wider text-[#1456D9] uppercase">
                         Global Talent &amp; Business Hub
                       </p>
                       <p className="mt-1 text-sm font-bold text-[#111827]">
@@ -788,7 +791,7 @@ export default function HomePage() {
       <section className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1456D9]">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
               WHY CHOOSE SDT
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
@@ -821,7 +824,7 @@ export default function HomePage() {
       <section className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1456D9]">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
               HOW WE WORK
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
@@ -871,7 +874,7 @@ export default function HomePage() {
       <section id="founder" className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1456D9]">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
               LEADERSHIP
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
@@ -882,25 +885,12 @@ export default function HomePage() {
           <div className="mt-12 grid items-start gap-10 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <div className="rounded-2xl border border-slate-200 bg-[#F4F7FB] p-6 text-center">
-                <div className="mx-auto flex h-44 w-44 max-w-full items-center justify-center rounded-2xl border border-slate-300/80 bg-white text-[#071A36] shadow-xs">
-                  <div className="flex flex-col items-center px-2">
-                    <svg
-                      className="h-16 w-16 text-[#1456D9]"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={1.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                      />
-                    </svg>
-                    <span className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-                      Founder Portrait Placeholder
-                    </span>
-                  </div>
+                <div className="mx-auto h-52 w-52 max-w-full overflow-hidden rounded-2xl border border-slate-300/80 bg-white shadow-xs">
+                  <img
+                    src="/founder.jpeg"
+                    alt="Amanullah Bhatti — Founder & CEO, SHANORA DIGITAL TECHNOLOGY"
+                    className="h-full w-full object-cover object-top"
+                  />
                 </div>
 
                 <h3 className="mt-5 text-xl font-extrabold text-[#111827]">
@@ -949,7 +939,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <blockquote className="mt-6 rounded-xl border-l-4 border-[#1456D9] bg-[#F4F7FB] px-5 py-4 text-sm font-medium italic text-[#071A36] sm:text-base">
+              <blockquote className="mt-6 rounded-xl border-l-4 border-[#1456D9] bg-[#F4F7FB] px-5 py-4 text-sm font-medium text-[#071A36] italic sm:text-base">
                 &ldquo;My vision is to build a globally recognized digital
                 technology brand that connects ideas, technology, and business
                 opportunities.&rdquo;
@@ -981,7 +971,7 @@ export default function HomePage() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1456D9]">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
               ABOUT SDT
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
@@ -997,7 +987,7 @@ export default function HomePage() {
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#1456D9]">
+              <h3 className="text-xs font-extrabold tracking-wider text-[#1456D9] uppercase">
                 OUR MISSION
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-700">
@@ -1007,7 +997,7 @@ export default function HomePage() {
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#1456D9]">
+              <h3 className="text-xs font-extrabold tracking-wider text-[#1456D9] uppercase">
                 OUR VISION
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-700">
@@ -1017,7 +1007,7 @@ export default function HomePage() {
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#1456D9]">
+              <h3 className="text-xs font-extrabold tracking-wider text-[#1456D9] uppercase">
                 OUR VALUES
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-700">
@@ -1034,7 +1024,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div className="max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#1456D9]">
+              <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
                 BLOG &amp; RESOURCES
               </p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
@@ -1101,7 +1091,7 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div className="max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#7BB8FF]">
+              <p className="text-xs font-bold tracking-widest text-[#7BB8FF] uppercase">
                 SHANORA DIGITAL TECHNOLOGY
               </p>
               <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
@@ -1135,7 +1125,7 @@ export default function HomePage() {
       <section id="contact" className="bg-[#F4F7FB] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1456D9]">
+            <p className="text-xs font-bold tracking-widest text-[#1456D9] uppercase">
               GET IN TOUCH
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#111827] sm:text-4xl">
@@ -1322,7 +1312,7 @@ export default function HomePage() {
                     <dt className="font-semibold text-slate-500">
                       Business Email
                     </dt>
-                    <dd className="mt-1 break-all font-medium text-[#111827]">
+                    <dd className="mt-1 font-medium break-all text-[#111827]">
                       {BUSINESS_EMAIL}
                     </dd>
                   </div>
@@ -1334,7 +1324,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <dt className="font-semibold text-slate-500">LinkedIn</dt>
-                    <dd className="mt-1 break-all font-medium text-[#111827]">
+                    <dd className="mt-1 font-medium break-all text-[#111827]">
                       {LINKEDIN_URL}
                     </dd>
                   </div>
@@ -1342,7 +1332,7 @@ export default function HomePage() {
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-white p-6">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-[#1456D9]">
+                <h3 className="text-sm font-bold tracking-wider text-[#1456D9] uppercase">
                   Form Submission Setup
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
