@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
-// Configured Contact & Optional Form Endpoint (set NEXT_PUBLIC_FORM_ENDPOINT in Vercel/env)
+// Configured Contact & Web3Forms Endpoint
 const CONTACT_EMAIL = "shanoradigitaltechnology@gmail.com";
 const WHATSAPP_DISPLAY = "03033639664";
 const WHATSAPP_WA_URL = "https://wa.me/923033639664";
-const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT ?? "";
+const WEB3FORMS_ACCESS_KEY = "3e21edcd-c79a-453c-b202-0d40d2f57b51";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 const TECHNOLOGIES = [
   "Next.js",
@@ -288,7 +289,10 @@ export default function HomePage() {
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formState.businessEmail.trim() || !emailPattern.test(formState.businessEmail.trim())) {
+    if (
+      !formState.businessEmail.trim() ||
+      !emailPattern.test(formState.businessEmail.trim())
+    ) {
       setErrorMessage("Please enter a valid business email address.");
       return;
     }
@@ -298,38 +302,40 @@ export default function HomePage() {
       return;
     }
 
-    if (!formState.projectDetails.trim() || formState.projectDetails.trim().length < 10) {
+    if (
+      !formState.projectDetails.trim() ||
+      formState.projectDetails.trim().length < 10
+    ) {
       setErrorMessage("Please share at least 10 characters of project details.");
-      return;
-    }
-
-    if (!FORM_ENDPOINT) {
-      setErrorMessage(
-        `Form endpoint is not configured yet. Please send your inquiry directly to ${CONTACT_EMAIL} or WhatsApp ${WHATSAPP_DISPLAY}.`
-      );
       return;
     }
 
     setSubmitting(true);
     try {
-      const response = await fetch(FORM_ENDPOINT, {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          fullName: formState.fullName.trim(),
-          businessEmail: formState.businessEmail.trim(),
-          companyName: formState.companyName.trim(),
-          serviceRequired: formState.serviceRequired,
-          projectBudget: formState.projectBudget.trim(),
-          projectDetails: formState.projectDetails.trim(),
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New SDT Project Inquiry — ${formState.serviceRequired}`,
+          from_name: "SHANORA Digital Technology Website",
+          name: formState.fullName.trim(),
+          email: formState.businessEmail.trim(),
+          company: formState.companyName.trim() || "Not specified",
+          service_required: formState.serviceRequired,
+          project_budget: formState.projectBudget.trim() || "Not specified",
+          message: formState.projectDetails.trim(),
+          botcheck: formState.honeypot.trim(),
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to send inquiry");
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Failed to send inquiry");
       }
 
       setSubmittedSuccess(true);
