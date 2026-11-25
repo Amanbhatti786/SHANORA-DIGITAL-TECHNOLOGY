@@ -16,15 +16,22 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="rounded-lg bg-indigo-600 px-2.5 py-1 text-base font-extrabold tracking-wider text-white">
-            SDT
-          </span>
-          <span className="text-sm font-bold tracking-tight text-slate-900 sm:text-base">
-            SHANORA DIGITAL TECHNOLOGY
-          </span>
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
+        <Link href="/" className="flex items-center gap-3">
+          <img
+            src="/sdt-logo.png"
+            alt="SDT — SHANORA DIGITAL TECHNOLOGY Logo"
+            className="h-10 w-10 rounded-lg object-contain ring-1 ring-slate-200"
+          />
+          <div className="leading-tight">
+            <span className="block text-sm font-extrabold tracking-wide text-slate-900 sm:text-base">
+              SDT
+            </span>
+            <span className="block text-[11px] font-medium tracking-wider text-slate-500">
+              SHANORA DIGITAL TECHNOLOGY
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm font-medium md:flex">
@@ -36,14 +43,20 @@ export default function Navbar() {
                 href={item.href}
                 className={
                   active
-                    ? "font-semibold text-indigo-600"
-                    : "text-slate-700 transition hover:text-indigo-600"
+                    ? "rounded-md bg-indigo-50 px-3 py-1.5 font-semibold text-indigo-600"
+                    : "px-2 py-1.5 text-slate-600 transition hover:text-slate-900"
                 }
               >
                 {item.label}
               </Link>
             );
           })}
+          <Link
+            href="/contact"
+            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+          >
+            Get Started
+          </Link>
         </nav>
 
         <button
@@ -58,13 +71,13 @@ export default function Navbar() {
 
       {open && (
         <div className="border-t border-slate-200 bg-white px-4 py-4 md:hidden">
-          <div className="flex flex-col gap-3 text-sm font-medium">
+          <div className="flex flex-col gap-2 text-sm font-medium">
             {navLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-2 py-1.5 text-slate-700 hover:bg-slate-50 hover:text-indigo-600"
+                className="rounded-lg px-3 py-2 text-slate-700 hover:bg-slate-50 hover:text-indigo-600"
               >
                 {item.label}
               </Link>
