@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
-// Editable Blogger & LinkedIn / Contact Placeholders
-const BLOGGER_BASE_URL = "#blog"; // Replace with your Blogger URL, e.g., "https://yourblog.blogspot.com"
-const FOUNDER_LINKEDIN_URL = "#contact"; // Replace with your verified LinkedIn profile URL
+const BLOGGER_BASE_URL = "#blog";
+const FOUNDER_LINKEDIN_URL = "#contact";
 const BUSINESS_EMAIL = "[ADD BUSINESS EMAIL]";
 const WHATSAPP_NUMBER = "[ADD WHATSAPP NUMBER]";
 const LINKEDIN_URL = "[ADD LINKEDIN URL]";
@@ -14,7 +13,15 @@ interface ServiceItem {
   id: string;
   title: string;
   description: string;
-  icon: "web" | "app" | "seo" | "marketing" | "ai" | "automation" | "school" | "consulting";
+  icon:
+    | "web"
+    | "app"
+    | "seo"
+    | "marketing"
+    | "ai"
+    | "automation"
+    | "school"
+    | "consulting";
 }
 
 const SERVICES: ServiceItem[] = [
@@ -177,51 +184,135 @@ function ServiceIcon({ type }: { type: ServiceItem["icon"] }) {
   switch (type) {
     case "web":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h12A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6zm0 3.75h16.5" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 6A2.25 2.25 0 016 3.75h12A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6zm0 3.75h16.5"
+          />
         </svg>
       );
     case "app":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
+          />
         </svg>
       );
     case "seo":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35m1.85-5.4a7.25 7.25 0 11-14.5 0 7.25 7.25 0 0114.5 0z" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M21 21l-4.35-4.35m1.85-5.4a7.25 7.25 0 11-14.5 0 7.25 7.25 0 0114.5 0z"
+          />
         </svg>
       );
     case "marketing":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+          />
         </svg>
       );
     case "ai":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
+          />
         </svg>
       );
     case "automation":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          />
         </svg>
       );
     case "school":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"
+          />
         </svg>
       );
     case "consulting":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+          />
         </svg>
       );
   }
@@ -232,26 +323,66 @@ function ValueCardIcon({ type }: { type: string }) {
   switch (type) {
     case "target":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zm0-4.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zm0-3a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 21a9 9 0 100-18 9 9 0 000 18zm0-4.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zm0-3a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+          />
         </svg>
       );
     case "layers":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+          />
         </svg>
       );
     case "spark":
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+          />
         </svg>
       );
     default:
       return (
-        <svg className={classes} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+        <svg
+          className={classes}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.8}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+          />
         </svg>
       );
   }
@@ -296,7 +427,9 @@ export default function HomePage() {
     }
 
     if (!formData.details.trim() || formData.details.trim().length < 10) {
-      setFormError("Please provide a brief description of your project (at least 10 characters).");
+      setFormError(
+        "Please provide a brief description of your project (at least 10 characters)."
+      );
       return;
     }
 
@@ -304,10 +437,9 @@ export default function HomePage() {
   };
 
   return (
-    <div id="home" className="bg-[#FFFFFF] text-[#111827]">
-      {/* 3. HERO SECTION */}
+    <div id="home" className="w-full max-w-full overflow-x-hidden bg-[#FFFFFF] text-[#111827]">
+      {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#071A36] text-white">
-        {/* Subtle Abstract Network & Soft Blue Lighting */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-[#1456D9]/25 blur-3xl"
@@ -326,27 +458,28 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-12">
-            {/* Left Column: Heading, Description & CTAs */}
-            <div className="lg:col-span-7">
-              <p className="inline-flex items-center gap-2 rounded-full border border-[#2684FF]/40 bg-[#1456D9]/20 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#7BB8FF]">
-                <span className="h-2 w-2 rounded-full bg-[#2684FF]" />
-                YOUR DIGITAL TECHNOLOGY PARTNER
+        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-24 lg:px-8">
+          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+            <div className="min-w-0 lg:col-span-7">
+              <p className="inline-flex items-center gap-2 rounded-full border border-[#2684FF]/40 bg-[#1456D9]/20 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#7BB8FF]">
+                <span className="h-2 w-2 shrink-0 rounded-full bg-[#2684FF]" />
+                <span>YOUR DIGITAL TECHNOLOGY PARTNER</span>
               </p>
 
-              <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.35rem] lg:leading-[1.12]">
+              <h1 className="mt-6 break-words text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.35rem] lg:leading-[1.12]">
                 Building Digital Solutions.{" "}
-                <span className="text-[#2684FF]">Connecting Global Businesses.</span>
+                <span className="text-[#2684FF]">
+                  Connecting Global Businesses.
+                </span>
               </h1>
 
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
                 We help businesses transform their ideas into powerful digital
                 experiences through professional web development, innovative
                 technology, and intelligent digital solutions.
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div className="mt-8 flex flex-wrap items-center gap-3.5">
                 <Link
                   href="#contact"
                   className="rounded-lg bg-[#1456D9] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2684FF]"
@@ -362,34 +495,32 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Column: Clean Abstract Digital Business Visual */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl border border-white/15 bg-white/[0.04] p-6 backdrop-blur-sm sm:p-7">
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#1456D9]/30 text-sm font-bold text-[#7BB8FF]">
+            <div className="min-w-0 lg:col-span-5">
+              <div className="rounded-2xl border border-white/15 bg-white/[0.04] p-5 backdrop-blur-sm sm:p-7">
+                <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1456D9]/30 text-sm font-bold text-[#7BB8FF]">
                       SDT
                     </div>
-                    <div>
-                      <p className="text-sm font-bold text-white">
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-bold text-white">
                         SHANORA DIGITAL TECHNOLOGY
                       </p>
-                      <p className="text-xs text-slate-300">
+                      <p className="truncate text-xs text-slate-300">
                         International Digital Services Agency
                       </p>
                     </div>
                   </div>
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#2684FF]" />
+                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#2684FF]" />
                 </div>
 
-                {/* Minimal Geometric Network Diagram */}
-                <div className="mt-6 space-y-4">
+                <div className="mt-5 space-y-4">
                   <div className="rounded-xl border border-white/10 bg-[#071A36]/80 p-4">
-                    <div className="flex items-center justify-between text-xs font-semibold text-[#7BB8FF]">
-                      <span>GLOBAL DIGITAL ARCHITECTURE</span>
+                    <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-[#7BB8FF]">
+                      <span>GLOBAL ARCHITECTURE</span>
                       <span>WEB • AI • CLOUD</span>
                     </div>
-                    <div className="mt-3 grid grid-cols-3 gap-2.5 text-center text-xs">
+                    <div className="mt-3 grid grid-cols-1 gap-2 text-center text-xs sm:grid-cols-3 sm:gap-2.5">
                       <div className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-2 text-slate-200">
                         Web &amp; Apps
                       </div>
@@ -418,7 +549,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. TRUST AND INTRODUCTION SECTION */}
+      {/* TRUST AND INTRODUCTION SECTION */}
       <section className="border-b border-slate-200 bg-[#F4F7FB]">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16 lg:px-8">
           <div className="max-w-3xl">
@@ -440,7 +571,7 @@ export default function HomePage() {
                 className="rounded-xl border border-slate-200/90 bg-white p-5 shadow-xs"
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#1456D9]/10 text-xs font-bold text-[#1456D9]">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#1456D9]/10 text-xs font-bold text-[#1456D9]">
                     0{idx + 1}
                   </span>
                   <h3 className="text-base font-bold text-[#111827]">
@@ -456,7 +587,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. SERVICES SECTION */}
+      {/* SERVICES SECTION */}
       <section id="services" className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
@@ -492,14 +623,17 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-3 border-t border-slate-100">
+                <div className="mt-6 border-t border-slate-100 pt-3">
                   <Link
                     href="#contact"
                     onClick={() => handleSelectService(service.title)}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1456D9] transition group-hover:text-[#2684FF]"
                   >
                     <span>Learn More</span>
-                    <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform group-hover:translate-x-0.5"
+                    >
                       →
                     </span>
                   </Link>
@@ -510,15 +644,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. FEATURED PROJECT SECTION — SHANORA */}
+      {/* FEATURED PROJECT SECTION — SHANORA */}
       <section
         id="portfolio"
         className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-12">
-            {/* Left: Project Info */}
-            <div className="lg:col-span-6">
+          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+            <div className="min-w-0 lg:col-span-6">
               <p className="text-xs font-bold uppercase tracking-widest text-[#1456D9]">
                 FEATURED PROJECT
               </p>
@@ -550,7 +683,7 @@ export default function HomePage() {
                     key={feature}
                     className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm font-medium text-[#111827]"
                   >
-                    <span className="h-2 w-2 rounded-full bg-[#1456D9]" />
+                    <span className="h-2 w-2 shrink-0 rounded-full bg-[#1456D9]" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -569,32 +702,28 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right: Clean Laptop Mockup Showcase */}
-            <div className="lg:col-span-6">
-              <div className="mx-auto max-w-xl">
-                {/* Laptop Screen Frame */}
-                <div className="rounded-t-2xl border-8 border-[#071A36] bg-[#071A36] shadow-xl">
-                  {/* Browser Top Bar */}
-                  <div className="flex items-center justify-between rounded-t-lg bg-[#102A54] px-3.5 py-2">
+            <div className="min-w-0 lg:col-span-6">
+              <div className="mx-auto w-full max-w-xl">
+                <div className="rounded-t-2xl border-4 border-[#071A36] bg-[#071A36] shadow-xl sm:border-8">
+                  <div className="flex items-center justify-between rounded-t-lg bg-[#102A54] px-3 py-2">
                     <div className="flex items-center gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
+                      <span className="h-2 w-2 rounded-full bg-white/30" />
+                      <span className="h-2 w-2 rounded-full bg-white/30" />
+                      <span className="h-2 w-2 rounded-full bg-white/30" />
                     </div>
                     <span className="rounded bg-[#071A36]/80 px-2.5 py-0.5 text-[11px] font-medium text-slate-200">
                       shanora.online
                     </span>
-                    <span className="w-8" />
+                    <span className="w-6" />
                   </div>
 
-                  {/* Mockup Interface Preview */}
-                  <div className="bg-white p-5 text-[#111827]">
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                      <div className="flex items-center gap-2.5">
+                  <div className="bg-white p-4 text-[#111827] sm:p-5">
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                      <div className="flex items-center gap-2">
                         <img
-                          src="/assets/logo/sdt-logo.png"
+                          src="/sdt-logo.png"
                           alt="SHANORA Platform Preview"
-                          className="h-7 w-auto object-contain"
+                          className="h-6 w-auto object-contain"
                         />
                         <span className="text-sm font-extrabold tracking-wide text-[#071A36]">
                           SHANORA
@@ -610,7 +739,8 @@ export default function HomePage() {
                         Global Talent &amp; Business Hub
                       </p>
                       <p className="mt-1 text-sm font-bold text-[#111827]">
-                        Connecting Professionals, Career Seekers &amp; Company Profiles
+                        Connecting Professionals, Career Seekers &amp; Company
+                        Profiles
                       </p>
                       <p className="mt-1.5 text-xs text-slate-600">
                         Structured profiles, company showcases, and community
@@ -618,32 +748,43 @@ export default function HomePage() {
                       </p>
                     </div>
 
-                    <div className="mt-4 grid grid-cols-3 gap-2.5 text-center">
-                      <div className="rounded-lg border border-slate-200/80 p-2.5">
-                        <p className="text-xs font-bold text-[#071A36]">Profiles</p>
-                        <p className="mt-0.5 text-[11px] text-slate-500">Career &amp; Skills</p>
+                    <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                      <div className="rounded-lg border border-slate-200/80 p-2">
+                        <p className="text-xs font-bold text-[#071A36]">
+                          Profiles
+                        </p>
+                        <p className="mt-0.5 text-[10px] text-slate-500">
+                          Career &amp; Skills
+                        </p>
                       </div>
-                      <div className="rounded-lg border border-slate-200/80 p-2.5">
-                        <p className="text-xs font-bold text-[#071A36]">Companies</p>
-                        <p className="mt-0.5 text-[11px] text-slate-500">Brand Pages</p>
+                      <div className="rounded-lg border border-slate-200/80 p-2">
+                        <p className="text-xs font-bold text-[#071A36]">
+                          Companies
+                        </p>
+                        <p className="mt-0.5 text-[10px] text-slate-500">
+                          Brand Pages
+                        </p>
                       </div>
-                      <div className="rounded-lg border border-slate-200/80 p-2.5">
-                        <p className="text-xs font-bold text-[#071A36]">Network</p>
-                        <p className="mt-0.5 text-[11px] text-slate-500">Global Reach</p>
+                      <div className="rounded-lg border border-slate-200/80 p-2">
+                        <p className="text-xs font-bold text-[#071A36]">
+                          Network
+                        </p>
+                        <p className="mt-0.5 text-[10px] text-slate-500">
+                          Global Reach
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Laptop Base */}
-                <div className="mx-auto h-3.5 w-[106%] -ml-[3%] rounded-b-xl bg-slate-300 shadow-md" />
+                <div className="h-3 w-full rounded-b-xl bg-slate-300 shadow-md" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 7. WHY CHOOSE SDT SECTION */}
+      {/* WHY CHOOSE SDT SECTION */}
       <section className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
@@ -676,7 +817,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. HOW WE WORK SECTION (Horizontal on Desktop, Vertical on Mobile) */}
+      {/* HOW WE WORK SECTION */}
       <section className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
@@ -688,12 +829,10 @@ export default function HomePage() {
             </h2>
           </div>
 
-          {/* Timeline Container */}
           <div className="relative mt-12">
-            {/* Desktop Horizontal Connector Line */}
             <div
               aria-hidden="true"
-              className="hidden lg:block absolute top-6 left-0 right-0 h-0.5 bg-slate-300"
+              className="absolute top-6 right-0 left-0 hidden h-0.5 bg-slate-300 lg:block"
             />
 
             <div className="relative grid gap-8 lg:grid-cols-4 lg:gap-6">
@@ -702,7 +841,6 @@ export default function HomePage() {
                   key={item.step}
                   className="relative flex gap-4 lg:flex-col lg:gap-0"
                 >
-                  {/* Mobile Vertical Connector */}
                   {index < PROCESS_STEPS.length - 1 && (
                     <span
                       aria-hidden="true"
@@ -710,12 +848,10 @@ export default function HomePage() {
                     />
                   )}
 
-                  {/* Step Marker */}
                   <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#1456D9] bg-white text-xs font-extrabold text-[#1456D9] shadow-xs">
                     0{index + 1}
                   </div>
 
-                  {/* Step Content */}
                   <div className="flex-1 rounded-2xl border border-slate-200 bg-white p-5 lg:mt-5">
                     <p className="text-xs font-bold tracking-wider text-[#1456D9]">
                       {item.step} — {item.label}
@@ -731,7 +867,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. FOUNDER SECTION */}
+      {/* FOUNDER SECTION */}
       <section id="founder" className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
@@ -744,11 +880,10 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 grid items-start gap-10 lg:grid-cols-12">
-            {/* Left Side: Founder Portrait Placeholder Card */}
             <div className="lg:col-span-4">
               <div className="rounded-2xl border border-slate-200 bg-[#F4F7FB] p-6 text-center">
-                <div className="mx-auto flex h-44 w-44 items-center justify-center rounded-2xl border border-slate-300/80 bg-white text-[#071A36] shadow-xs">
-                  <div className="flex flex-col items-center">
+                <div className="mx-auto flex h-44 w-44 max-w-full items-center justify-center rounded-2xl border border-slate-300/80 bg-white text-[#071A36] shadow-xs">
+                  <div className="flex flex-col items-center px-2">
                     <svg
                       className="h-16 w-16 text-[#1456D9]"
                       fill="none"
@@ -780,7 +915,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Side: Biography & Statement */}
             <div className="lg:col-span-8">
               <div className="space-y-4 text-base leading-relaxed text-slate-700">
                 <p>
@@ -840,7 +974,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10. ABOUT SDT SECTION */}
+      {/* ABOUT SDT SECTION */}
       <section
         id="about"
         className="border-y border-slate-200 bg-[#F4F7FB] py-16 sm:py-20 lg:py-24"
@@ -895,7 +1029,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 11. BLOG SECTION (Blogger Integration Ready) */}
+      {/* BLOG SECTION */}
       <section id="blog" className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
@@ -939,7 +1073,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-3 border-t border-slate-200/70">
+                <div className="mt-6 border-t border-slate-200/70 pt-3">
                   <a
                     href={post.href}
                     className="text-sm font-semibold text-[#1456D9] hover:text-[#2684FF]"
@@ -953,15 +1087,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 12. FINAL CALL TO ACTION */}
+      {/* FINAL CALL TO ACTION */}
       <section className="relative overflow-hidden bg-[#071A36] py-16 text-white sm:py-20">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-[#2684FF]/20 blur-3xl"
+          className="pointer-events-none absolute top-0 -right-20 h-72 w-72 rounded-full bg-[#2684FF]/20 blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-[#1456D9]/25 blur-3xl"
+          className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-[#1456D9]/25 blur-3xl"
         />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -997,7 +1131,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 13. CONTACT SECTION */}
+      {/* CONTACT SECTION */}
       <section id="contact" className="bg-[#F4F7FB] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
@@ -1014,12 +1148,11 @@ export default function HomePage() {
           </div>
 
           <div className="mt-10 grid gap-10 lg:grid-cols-12">
-            {/* Left: Inquiry Form */}
-            <div className="lg:col-span-7">
+            <div className="min-w-0 lg:col-span-7">
               <form
                 onSubmit={handleSubmit}
                 noValidate
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs sm:p-8"
+                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs sm:p-8"
               >
                 {formError && (
                   <div
@@ -1059,7 +1192,7 @@ export default function HomePage() {
                         setFormData({ ...formData, name: e.target.value })
                       }
                       placeholder="Your full name"
-                      className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:outline-none focus:ring-2 focus:ring-[#1456D9]/20"
+                      className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                     />
                   </div>
 
@@ -1080,7 +1213,7 @@ export default function HomePage() {
                         setFormData({ ...formData, email: e.target.value })
                       }
                       placeholder="you@company.com"
-                      className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:outline-none focus:ring-2 focus:ring-[#1456D9]/20"
+                      className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                     />
                   </div>
 
@@ -1100,7 +1233,7 @@ export default function HomePage() {
                         setFormData({ ...formData, company: e.target.value })
                       }
                       placeholder="Company or organization"
-                      className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:outline-none focus:ring-2 focus:ring-[#1456D9]/20"
+                      className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                     />
                   </div>
 
@@ -1118,7 +1251,7 @@ export default function HomePage() {
                       onChange={(e) =>
                         setFormData({ ...formData, service: e.target.value })
                       }
-                      className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] focus:border-[#1456D9] focus:outline-none focus:ring-2 focus:ring-[#1456D9]/20"
+                      className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                     >
                       {SERVICES.map((s) => (
                         <option key={s.id} value={s.title}>
@@ -1145,7 +1278,7 @@ export default function HomePage() {
                       setFormData({ ...formData, budget: e.target.value })
                     }
                     placeholder="e.g., Flexible / To be discussed"
-                    className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:outline-none focus:ring-2 focus:ring-[#1456D9]/20"
+                    className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                   />
                 </div>
 
@@ -1166,7 +1299,7 @@ export default function HomePage() {
                       setFormData({ ...formData, details: e.target.value })
                     }
                     placeholder="Share your goals, timeline, and key requirements..."
-                    className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:outline-none focus:ring-2 focus:ring-[#1456D9]/20"
+                    className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-slate-400 focus:border-[#1456D9] focus:ring-2 focus:ring-[#1456D9]/20 focus:outline-none"
                   />
                 </div>
 
@@ -1179,8 +1312,7 @@ export default function HomePage() {
               </form>
             </div>
 
-            {/* Right: Contact Placeholders & Free Form Integration Note */}
-            <div className="space-y-6 lg:col-span-5">
+            <div className="min-w-0 space-y-6 lg:col-span-5">
               <div className="rounded-2xl border border-slate-200 bg-white p-6">
                 <h3 className="text-lg font-bold text-[#111827]">
                   Direct Contact Details
@@ -1190,7 +1322,7 @@ export default function HomePage() {
                     <dt className="font-semibold text-slate-500">
                       Business Email
                     </dt>
-                    <dd className="mt-1 font-medium text-[#111827]">
+                    <dd className="mt-1 break-all font-medium text-[#111827]">
                       {BUSINESS_EMAIL}
                     </dd>
                   </div>
@@ -1202,7 +1334,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <dt className="font-semibold text-slate-500">LinkedIn</dt>
-                    <dd className="mt-1 font-medium text-[#111827]">
+                    <dd className="mt-1 break-all font-medium text-[#111827]">
                       {LINKEDIN_URL}
                     </dd>
                   </div>
@@ -1216,9 +1348,8 @@ export default function HomePage() {
                 <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
                   This form includes client-side validation only and does not
                   send emails on its own. To receive live inquiries on static
-                  hosting (such as GitHub Pages), connect the form action or
-                  submit handler to a free form endpoint such as Formspree or
-                  Web3Forms.
+                  hosting, connect the form to a free form endpoint such as
+                  Formspree or Web3Forms.
                 </p>
               </div>
             </div>
