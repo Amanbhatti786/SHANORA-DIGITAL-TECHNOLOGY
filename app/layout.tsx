@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "SDT | SHANORA DIGITAL TECHNOLOGY",
   description:
     "Official digital platform of SDT (SHANORA DIGITAL TECHNOLOGY) for web applications, IT solutions, and modern digital systems.",
+  icons: {
+    icon: "/sdt-logo.jpg",
+  },
 };
 
 export default function RootLayout({
