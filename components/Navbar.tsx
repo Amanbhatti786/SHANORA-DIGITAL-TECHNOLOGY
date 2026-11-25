@@ -37,26 +37,27 @@ export default function Navbar() {
           : "border-b border-white/10 bg-[#071A36] text-white shadow-md"
       }`}
     >
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-3 py-3 sm:px-6 lg:px-8">
-        {/* Left: Official SDT Logo */}
-        <Link
-          href="/#home"
-          className="flex shrink-0 items-center rounded-md bg-white px-2 py-1 shadow-xs"
-        >
-          <img
-            src="/sdt-logo.png"
-            alt="SDT — SHANORA DIGITAL TECHNOLOGY Logo"
-            className="h-8 w-auto max-w-[68px] object-contain sm:h-10 sm:max-w-none"
-          />
-        </Link>
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2.5 px-3 py-3 sm:px-6 lg:px-8">
+        {/* Left: Official SDT Logo + Shanora Digital Technology */}
+        <div className="flex min-w-0 flex-1 items-center gap-2.5 sm:flex-initial sm:gap-3.5">
+          <Link
+            href="/#home"
+            className="flex shrink-0 items-center rounded-lg bg-white px-2.5 py-1.5 shadow-xs transition hover:bg-slate-100"
+          >
+            <img
+              src="/sdt-logo.png"
+              alt="SDT — SHANORA DIGITAL TECHNOLOGY Logo"
+              className="h-10 w-auto max-w-[92px] object-contain sm:h-12 sm:max-w-none"
+            />
+          </Link>
 
-        {/* Center Card: Shanora Digital Technology */}
-        <Link
-          href="/#home"
-          className="min-w-0 flex-1 truncate rounded-lg border border-white/20 bg-white/10 px-2.5 py-1.5 text-center text-[11px] font-bold tracking-tight text-white transition hover:bg-white/15 sm:flex-initial sm:px-4 sm:py-2 sm:text-sm"
-        >
-          <span className="truncate">Shanora Digital Technology</span>
-        </Link>
+          <Link
+            href="/#home"
+            className="min-w-0 flex-1 truncate rounded-lg border border-white/20 bg-white/[0.08] px-3 py-2 text-left text-xs font-bold tracking-tight text-white transition hover:border-[#2684FF]/60 hover:bg-white/[0.14] sm:flex-initial sm:px-4 sm:py-2.5 sm:text-base"
+          >
+            <span className="truncate">Shanora Digital Technology</span>
+          </Link>
+        </div>
 
         {/* Desktop Navigation */}
         <nav
@@ -88,8 +89,10 @@ export default function Navbar() {
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav-drawer"
-            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="inline-flex shrink-0 items-center justify-center rounded-lg border border-white/25 bg-white/10 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-white/15 lg:hidden"
+            aria-label={
+              mobileOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            className="inline-flex shrink-0 items-center justify-center rounded-lg border border-white/25 bg-white/10 px-2.5 py-2 text-xs font-semibold text-white transition hover:bg-white/15 lg:hidden"
           >
             {mobileOpen ? "Close" : "Menu"}
           </button>
