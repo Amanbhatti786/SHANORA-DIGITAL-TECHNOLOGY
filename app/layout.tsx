@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const CANONICAL_URL = "https://shanora.online"; // Update if using a dedicated agency domain
+const CANONICAL_URL = "https://shanora.online";
 
 export const metadata: Metadata = {
   title: "SHANORA DIGITAL TECHNOLOGY | Web Development & Digital Solutions",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/logo/sdt-logo.png",
+        url: "/sdt-logo.png",
         alt: "SHANORA DIGITAL TECHNOLOGY (SDT) Official Logo",
       },
     ],
@@ -44,12 +44,12 @@ export const metadata: Metadata = {
     title: "SHANORA DIGITAL TECHNOLOGY | Web Development & Digital Solutions",
     description:
       "SHANORA DIGITAL TECHNOLOGY provides professional web development, digital marketing, SEO, AI solutions, and business technology services.",
-    images: ["/assets/logo/sdt-logo.png"],
+    images: ["/sdt-logo.png"],
   },
   icons: {
-    icon: "/assets/logo/sdt-logo.png",
-    shortcut: "/assets/logo/sdt-logo.png",
-    apple: "/assets/logo/sdt-logo.png",
+    icon: "/sdt-logo.png",
+    shortcut: "/sdt-logo.png",
+    apple: "/sdt-logo.png",
   },
 };
 
@@ -60,9 +60,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth motion-reduce:scroll-auto">
-      <body className="flex min-h-screen flex-col bg-[#FFFFFF] text-[#111827] antialiased selection:bg-[#1456D9] selection:text-white">
+      <body className="flex min-h-screen w-full max-w-full flex-col overflow-x-hidden bg-[#FFFFFF] text-[#111827] antialiased selection:bg-[#1456D9] selection:text-white">
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="w-full max-w-full flex-1 overflow-x-hidden">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
