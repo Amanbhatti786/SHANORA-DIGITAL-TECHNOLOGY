@@ -17,30 +17,29 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-        {/* Logo + Name Card */}
-        <div className="flex items-center gap-3">
-          <Link href="/" className="flex shrink-0 items-center">
-            <img
-              src="/sdt-logo.png"
-              alt="SDT Logo"
-              className="h-11 w-auto object-contain sm:h-12"
-            />
-          </Link>
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-3 sm:px-6">
+        {/* Left: Logo */}
+        <Link href="/" className="flex shrink-0 items-center">
+          <img
+            src="/sdt-logo.png"
+            alt="SDT Logo"
+            className="h-9 w-auto object-contain sm:h-11"
+          />
+        </Link>
 
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-3.5 py-2 text-slate-900 shadow-sm transition hover:bg-indigo-100/70"
-          >
-            <span className="h-2 w-2 shrink-0 rounded-full bg-indigo-600" />
-            <span className="whitespace-nowrap text-xs font-bold tracking-wide sm:text-sm">
-              Shanora Digital Technology
-            </span>
-          </Link>
-        </div>
+        {/* Center: Shanora Digital Technology Card (between Logo and Menu/Nav) */}
+        <Link
+          href="/"
+          className="mx-1 inline-flex min-w-0 items-center justify-center gap-1.5 rounded-xl border border-indigo-200 bg-indigo-50/90 px-2.5 py-1.5 text-slate-900 shadow-sm transition hover:bg-indigo-100/70 sm:px-4 sm:py-2"
+        >
+          <span className="h-2 w-2 shrink-0 rounded-full bg-indigo-600" />
+          <span className="truncate text-[11px] font-bold tracking-tight sm:text-sm">
+            Shanora Digital Technology
+          </span>
+        </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
+        {/* Right: Desktop Nav */}
+        <nav className="hidden shrink-0 items-center gap-5 text-sm font-medium md:flex">
           {navLinks.map((item) => {
             const active = pathname === item.href;
             return (
@@ -65,18 +64,18 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Mobile Button */}
+        {/* Right: Mobile Menu Button */}
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 md:hidden"
+          className="shrink-0 rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-700 sm:text-sm md:hidden"
           aria-label="Toggle Menu"
         >
           {open ? "Close" : "Menu"}
         </button>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Dropdown Menu */}
       {open && (
         <div className="border-t border-slate-200 bg-white px-4 py-4 md:hidden">
           <div className="flex flex-col gap-2 text-sm font-medium">
